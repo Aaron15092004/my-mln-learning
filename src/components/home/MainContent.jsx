@@ -780,9 +780,9 @@ const MainContent = () => {
                                                         </div>
                                                         <span className="theme-boximg-color" />
                                                         <div className="box-readmore">
-                                                          <a
+                                                          <Link
                                                             className="boxlink mb2-pb-btn typeprimary sizenormal rounded-1 btnborder0 fwglobal"
-                                                            href="#"
+                                                            to="/tuvi"
                                                             style={{
                                                               "--mb2-pb-btn-bgcolor":
                                                                 "rgb(                                                                    255,                                                                    178,                                                                    0                                                                  )",
@@ -794,8 +794,8 @@ const MainContent = () => {
                                                                 "rgb(                                                                    36,                                                                    32,                                                                    39                                                                  )",
                                                             }}
                                                           >
-                                                            Read more
-                                                          </a>
+                                                            Xem Tử Vi
+                                                          </Link>
                                                         </div>
                                                       </div>
                                                     </div>
