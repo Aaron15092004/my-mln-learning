@@ -6,7 +6,6 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      // Proxy requests to Moodle assets to avoid CORS
       "/theme": {
         target: "https://lmsstyle.com",
         changeOrigin: true,
