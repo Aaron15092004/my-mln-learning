@@ -1,23 +1,11 @@
-/*!
- * table-grid (http://mdo.github.io/table-grid)
- * Released under MIT, (c) 2014 Mark Otto
- */
-
-.tuvi-container-wrapper html {
-  font-size: 14px;
-}
-
-@media (min-width: 600px) {
-  .tuvi-container-wrapper html {
-    font-size: 14px;
-  }
-}
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 .tuvi-container-wrapper {
   margin: 0;
   padding-bottom: 3rem;
-  font-family: "Noto Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Lexend", sans-serif;
   text-align: center;
+  font-size: 15px;
 }
 
 .tuvi-container-wrapper canvas {
@@ -49,7 +37,7 @@
 .tuvi-container-wrapper h2,
 .tuvi-container-wrapper h3 {
   margin-top: 0;
-  margin-bottom: 0.5rem;
+  margin-bottom: 2rem;
   font-weight: 600;
   line-height: 1.1;
   color: #ffffff;
@@ -100,6 +88,74 @@
   display: inline-block;
 }
 
+.tuvi-container-wrapper .back-home {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  --c1: #23153c;
+  --c2: #2185d0;
+  --size-letter: 24px;
+  padding: 0.5em 1em;
+  font-size: var(--size-letter);
+  background-color: transparent;
+  border: calc(var(--size-letter) / 6) solid var(--c2);
+  border-radius: 0.2em;
+  cursor: pointer;
+  overflow: hidden;
+  transition: 300ms cubic-bezier(0.83, 0, 0.17, 1);
+}
+
+.tuvi-container-wrapper .back-home > .text {
+  font-weight: 700;
+  color: var(--c2);
+  position: relative;
+  z-index: 1;
+  transition: color 700ms cubic-bezier(0.83, 0, 0.17, 1);
+}
+
+.tuvi-container-wrapper .back-home::before {
+  top: 0;
+  left: 0;
+  content: "";
+  width: 150%;
+  aspect-ratio: 1/1;
+  scale: 0;
+  transition: 1000ms cubic-bezier(0.76, 0, 0.24, 1);
+  background-color: var(--c2);
+  border-radius: 50%;
+  position: absolute;
+  translate: -50% -50%;
+}
+
+.tuvi-container-wrapper .back-home::after {
+  top: 100%;
+  left: 100%;
+  content: "";
+  width: 150%;
+  aspect-ratio: 1/1;
+  scale: 0;
+  transition: 1000ms cubic-bezier(0.76, 0, 0.24, 1);
+  background-color: var(--c2);
+  border-radius: 50%;
+  position: absolute;
+  translate: -50% -50%;
+}
+
+.tuvi-container-wrapper .back-home:hover {
+  & > span {
+    color: var(--c1);
+  }
+  &::before,
+  &::after {
+    scale: 1;
+  }
+}
+
+.tuvi-container-wrapper .back-home:active {
+  scale: 0.98;
+  filter: brightness(0.9);
+}
+
 /* Masthead */
 
 .tuvi-container-wrapper .masthead {
@@ -129,7 +185,6 @@
 .tuvi-container-wrapper .grid-example .col {
   line-height: 3;
   text-align: center;
-  color: #333;
   /*background-color: rgba(255, 0, 0, .15);*/
 }
 
@@ -158,8 +213,8 @@
 }
 
 .tuvi-container-wrapper .laso {
-  width: 800px;
-  height: 1270px;
+  width: 100%;
+  height: 100%;
   margin-right: auto;
   margin-left: auto;
   overflow: hidden;
@@ -294,10 +349,49 @@
   padding-right: 2rem;
 }
 
+.tuvi-container-wrapper input,
 .tuvi-container-wrapper select {
-  height: 2.25em;
-  border: 1px solid #ccc;
-  background-color: #fff;
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.tuvi-container-wrapper input:focus,
+.tuvi-container-wrapper select:focus {
+  outline: none;
+  border-color: #2185d0;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 0 3px rgba(33, 133, 208, 0.2);
+}
+
+/* Style cho options trong dropdown - ĐÂY LÀ PHẦN QUAN TRỌNG */
+.tuvi-container-wrapper select option {
+  background-color: #333; /* Nền tối cho dropdown */
+  color: #fff; /* Chữ trắng */
+  padding: 0.5rem;
+}
+
+/* Style khi hover option */
+.tuvi-container-wrapper select option:hover {
+  background-color: #2185d0;
+}
+
+/* Style cho option được chọn */
+.tuvi-container-wrapper select option:checked {
+  background-color: #2185d0;
+}
+
+.tuvi-container-wrapper input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+  cursor: pointer;
+  accent-color: #2185d0;
 }
 
 .tuvi-container-wrapper .grid .left {
@@ -315,6 +409,10 @@
   padding-right: 40px;
   padding-left: 40px;
   border-radius: 45px;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  font-size: 18px;
 }
 
 .tuvi-container-wrapper .border {
@@ -384,14 +482,24 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+.tuvi-container-wrapper .button.primary {
+  width: 100%;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.tuvi-container-wrapper .button.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
 .tuvi-container-wrapper input.primary:hover {
   background-color: #1678c2;
   color: #fff;
   text-shadow: none;
-}
-
-.tuvi-container-wrapper #namsinh {
-  width: 100px;
 }
 
 .tuvi-container-wrapper input.warning {
@@ -405,10 +513,6 @@
   color: #fff;
   text-shadow: none;
 }
-
-/*.phuTinh .col{
-    padding-bottom: 0.2em;
-}*/
 
 .tuvi-container-wrapper .phuTinh .saotot {
   width: 46%;
@@ -441,17 +545,6 @@
   font-size: 14px;
 }
 
-/*.blocks:nth-child(odd){
-    text-align: left;
-}
-.blocks:nth-child(even){
-    text-align: right;
-}*/
-
-.tuvi-container-wrapper .anlaso {
-  /* display: none !important; */
-}
-
 .tuvi-container-wrapper .hide {
   width: 46%;
   white-space: nowrap;
@@ -475,7 +568,12 @@
 }
 
 .tuvi-container-wrapper .thongtin {
-  padding-bottom: 1rem;
+  padding-bottom: 1.5rem;
+  align-items: center;
+}
+
+.tuvi-container-wrapper .thongtinngaysinh {
+  align-items: center;
 }
 
 .tuvi-container-wrapper .grid-padded {
@@ -648,4 +746,116 @@
 
 .tuvi-container-wrapper .tooltips {
   cursor: help;
+}
+
+/* Mobile Responsive - CHỈ THU NHỎ LÁ SỐ, KHÔNG ĐỔI VỊ TRÍ */
+
+@media screen and (max-width: 768px) {
+  .tuvi-container-wrapper {
+    font-size: 12px;
+    padding-bottom: 1rem;
+  }
+
+  .tuvi-container-wrapper h1 {
+    font-size: 1.8rem;
+  }
+
+  .tuvi-container-wrapper h2 {
+    font-size: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .tuvi-container-wrapper .masthead {
+    padding: 2rem 0.5rem;
+  }
+
+  .tuvi-container-wrapper .container-2 {
+    max-width: 100%;
+    padding: 0 10px;
+  }
+
+  .tuvi-container-wrapper .formborder {
+    padding: 15px;
+    border-radius: 20px;
+    font-size: 14px;
+  }
+
+  /* Form inputs */
+  .tuvi-container-wrapper input,
+  .tuvi-container-wrapper select {
+    font-size: 14px;
+    padding: 0.6rem;
+  }
+
+  /* Grid layout cho form */
+  .tuvi-container-wrapper .grid.thongtin {
+    display: block;
+  }
+
+  .tuvi-container-wrapper .grid.thongtin .col {
+    display: block;
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  .tuvi-container-wrapper .grid.thongtin .col-3 {
+    text-align: left;
+    margin-bottom: 0.3rem;
+  }
+
+  .tuvi-container-wrapper .grid.thongtinngaysinh {
+    display: flex;
+    gap: 5px;
+  }
+
+  .tuvi-container-wrapper .grid.thongtinngaysinh .col {
+    flex: 1;
+    width: auto !important;
+  }
+
+  /* Button */
+  .tuvi-container-wrapper .button.primary {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  /* ==================== LÁ SỐ - CHỈ THU NHỎ, GIỮ NGUYÊN LAYOUT ==================== */
+
+  /* ===== LÁ SỐ - Scale xuống 70% ===== */
+  .tuvi-container-wrapper .anlaso {
+    height: auto !important;
+    transform: scale(0.45);
+    transform-origin: top center;
+    width: 222%;
+    margin-left: -61%;
+  }
+
+  .tuvi-container-wrapper .laso {
+    height: auto;
+    overflow: visible;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .tuvi-container-wrapper h1 {
+    font-size: 0.5rem;
+  }
+
+  /* Lá số scale xuống 50% cho màn hình nhỏ */
+  .tuvi-container-wrapper .anlaso {
+    transform: scale(0.45);
+    width: 222%;
+    margin-left: -61%;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  /* iPhone SE và các màn hình rất nhỏ */
+  .tuvi-container-wrapper .anlaso {
+    transform: scale(0.45);
+    width: 222%;
+    margin-left: -61%;
+  }
 }

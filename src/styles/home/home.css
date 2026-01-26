@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
 @-webkit-keyframes rightEnd {
   0% {
     left: 0;
@@ -130,7 +132,6 @@
   display: none;
   z-index: 9999999;
 }
-@charset "UTF-8";
 :root {
   --mb2-pb-fsbase: 15px;
   --mb2-pb-textcolor: rgb(79, 76, 81);
@@ -4271,7 +4272,7 @@ a:not([class]):focus {
 }
 .main-logo .logo-light.is_svg,
 .main-logo .logo-dark.is_svg {
-  height: 46px;
+  height: 90px;
 }
 .main-logo .logo-dark {
   display: none;
@@ -8154,4 +8155,14 @@ button.acsb-btn-css:hover {
   justify-content: center;
   width: 38px;
   font-size: 18px;
+}
+
+html,
+body,
+* {
+  font-family:
+    "Lexend",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif !important;
 }

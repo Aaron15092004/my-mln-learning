@@ -1,12 +1,50 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import demoCert from "../../assets/images/demo_certificates.png";
 import { Link } from "react-router-dom";
 
 const MainContent = () => {
-  const [selectedLanguage, setSelectedLanguage] = useState("Python");
+  const [selectedLanguage, setSelectedLanguage] = useState("JavaScript");
   const [isSelectOpen, setIsSelectOpen] = useState(false);
 
-  const languages = ["Python", "C++", "JavaScript", "PHP", "Swift"];
+  const vantaRef = useRef(null);
+  const vantaEffect = useRef(null);
+  const languages = ["JavaScript"];
+
+  useEffect(() => {
+    const initVanta = () => {
+      console.log("Window.VANTA:", window.VANTA); // Debug
+      console.log("vantaRef.current:", vantaRef.current); // Debug
+
+      if (window.VANTA && window.VANTA.BIRDS && vantaRef.current) {
+        try {
+          vantaEffect.current = window.VANTA.BIRDS({
+            el: vantaRef.current,
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.0,
+            minWidth: 200.0,
+            scale: 1.0,
+            scaleMobile: 1.0,
+            backgroundColor: 0x80633,
+            color1: 0xffea,
+            color2: 0x21e2ea,
+          });
+          console.log("Vanta initialized:", vantaEffect.current); // Debug
+        } catch (err) {
+          console.error("Vanta error:", err);
+        }
+      }
+    };
+
+    // Đợi một chút để đảm bảo DOM đã render
+    const timer = setTimeout(initVanta, 500);
+
+    return () => {
+      clearTimeout(timer);
+      if (vantaEffect.current) vantaEffect.current.destroy();
+    };
+  }, []);
 
   return (
     <div className="pagelayout-content d-flex flex-column">
@@ -141,10 +179,10 @@ const MainContent = () => {
                       >
                         {/* Hero Section */}
                         <div
+                          ref={vantaRef}
                           className="mb2-pb-row pre-bg0 dark bgfixed0 wave-none va0 bgfixed0 wavefliph1 wavepos0 colgutter-s parallax0 heroimg1 herovbottom herogradl0 herogradr0 bgtextmob0 waveover1 heroonsmall0 bordert0 borderb0 borderfw1 obgimg1 heroisimg isfw0 isbg rowpt-150 rowpb-100"
                           style={{
                             marginTop: "0px",
-                            "--mb-pb-row_bgcolor": "rgb(54, 38, 178)",
                             "--mb-pb-row_btcolor": "#dddddd",
                             "--mb-pb-row_bbcolor": "#dddddd",
                             "--mb-pb-row_btw": "1px",
@@ -184,14 +222,14 @@ const MainContent = () => {
                                         className="heading heading-none upper0 fwglobal lhglobal pbtsize-2"
                                       >
                                         <span className="btext fwglobal">
-                                          Improve your programming skills with
+                                          Khám phá Triết học Mác - Lênin
                                         </span>
                                         <span
                                           className="headingtext fwglobal nline0"
                                           style={{ color: "rgb(255, 180, 0)" }}
                                         >
                                           {" "}
-                                          New Learning
+                                          Cùng Nhóm 6 - KS1872
                                         </span>
                                       </h4>
 
@@ -211,8 +249,7 @@ const MainContent = () => {
                                       >
                                         <div className="select-label">
                                           <span className="labeltext">
-                                            Choose one of 5 programming
-                                            languages:
+                                            Website được code bằng ngôn ngữ
                                           </span>
                                         </div>
                                         <div className="select-container">
@@ -316,7 +353,7 @@ const MainContent = () => {
                                                   color: "rgb(0, 180, 216)",
                                                 }}
                                               >
-                                                Self-paced learning
+                                                Khám phá Triết học Mác - Lênin
                                               </span>
                                             </div>
                                           </li>
@@ -335,11 +372,11 @@ const MainContent = () => {
                                               <span
                                                 className="list-text"
                                                 style={{
-                                                  color: "rgb(0, 180, 216)",
+                                                  color: "rgb(0, 164, 197)",
                                                 }}
                                               >
-                                                Virtual training classes using
-                                                web meeting tools
+                                                Tử Vi đẩu số - "Hiểu mệnh - Biết
+                                                vận - Làm chủ tương lai"
                                               </span>
                                             </div>
                                           </li>
@@ -417,9 +454,14 @@ const MainContent = () => {
                                         id="typed_69724aa544346"
                                         className="heading heading-center upper0 fwglobal lhglobal pbtsize-1"
                                       >
-                                        <span className="headingtext fwglobal nline0">
-                                          Trusted by tech professionals at
-                                          thousands of companies
+                                        <span
+                                          className="headingtext fwglobal nline0"
+                                          style={{ color: "#00B4D8" }}
+                                        >
+                                          "Các nhà triết học đã chỉ giải thích
+                                          thế giới bằng nhiều cách khác nhau,
+                                          song vấn đề là cải tạo thế giới" -
+                                          Karl Marx
                                         </span>
                                       </h4>
                                       <div
@@ -491,10 +533,7 @@ const MainContent = () => {
                                                 fontSize: "1rem",
                                               }}
                                             >
-                                              <p>
-                                                Mattis pretium erat torquent
-                                                fermentum?
-                                              </p>
+                                              <p>Bạn đã sẵn sàng chưa?</p>
                                             </div>
                                           </div>
                                         </div>
@@ -517,8 +556,11 @@ const MainContent = () => {
                                             maxWidth: "2000px",
                                           }}
                                         >
-                                          <span className="headingtext fwglobal nline0">
-                                            Learn by doing
+                                          <span
+                                            className="headingtext fwglobal nline0"
+                                            style={{ color: "#00B4D8" }}
+                                          >
+                                            Học thông qua các trò chơi thú vị
                                           </span>
                                         </h4>
                                         <div
@@ -543,12 +585,13 @@ const MainContent = () => {
                                               }}
                                             >
                                               <p>
-                                                Dictumst vivamus donec faucibus
-                                                lectus arcu hendrerit. Facilisis
-                                                porttitor congue odio blandit
-                                                luctus? Pulvinar, arcu convallis
-                                                nec porttitor interdum dictumst.
-                                                Cursus blandit ullamcorper erat.
+                                                Phương pháp học tập hiện đại Kết
+                                                hợp lý thuyết với thực tiễn,
+                                                giúp người học vận dụng các
+                                                nguyên lý triết học Mác - Lênin
+                                                vào phân tích các vấn đề thực tế
+                                                của xã hội Việt Nam và thế giới
+                                                đương đại.
                                               </p>
                                             </div>
                                           </div>
@@ -596,16 +639,17 @@ const MainContent = () => {
                                                           }}
                                                         >
                                                           <span className="box-title-text">
-                                                            Cloud playgrounds
+                                                            Multiple choice
+                                                            Practice
                                                           </span>
                                                         </h4>
                                                         <div className="box-desc">
-                                                          Etiam tortor leo,
-                                                          hendrerit vel lobortis
-                                                          id, finibus ac nulla.
-                                                          Vivamus gravida metus
-                                                          quam, quis condimentum
-                                                          erat dapibus nec.
+                                                          Hệ thống Luyện tập với
+                                                          các câu hỏi trắc
+                                                          nghiệm đa dạng, từ cơ
+                                                          bản đến nâng cao, giúp
+                                                          củng cố kiến thức
+                                                          triết học.
                                                         </div>
                                                         <span className="theme-boximg-color" />
                                                         <div className="box-readmore">
@@ -679,17 +723,16 @@ const MainContent = () => {
                                                           }}
                                                         >
                                                           <span className="box-title-text">
-                                                            Professional
-                                                            certificates
+                                                            Flip Card Game
                                                           </span>
                                                         </h4>
                                                         <div className="box-desc">
-                                                          Etiam tortor leo,
-                                                          hendrerit vel lobortis
-                                                          id, finibus ac nulla.
-                                                          Vivamus gravida metus
-                                                          quam, quis condimentum
-                                                          erat dapibus nec.
+                                                          Flashcard ôn tập Thẻ
+                                                          học tập thông minh với
+                                                          các khái niệm, định
+                                                          nghĩa và nguyên lý
+                                                          quan trọng, giúp ghi
+                                                          nhớ hiệu quả.
                                                         </div>
                                                         <span className="theme-boximg-color" />
                                                         <div className="box-readmore">
@@ -767,16 +810,15 @@ const MainContent = () => {
                                                           }}
                                                         >
                                                           <span className="box-title-text">
-                                                            Learn with experts
+                                                            Bói Tử Vi vui
                                                           </span>
                                                         </h4>
                                                         <div className="box-desc">
-                                                          Etiam tortor leo,
-                                                          hendrerit vel lobortis
-                                                          id, finibus ac nulla.
-                                                          Vivamus gravida metus
-                                                          quam, quis condimentum
-                                                          erat dapibus nec.
+                                                          "Trong sự vận động
+                                                          biện chứng của vũ trụ,
+                                                          vận mệnh cá nhân là sự
+                                                          thống nhất giữa tất
+                                                          nhiên và ngẫu nhiên."
                                                         </div>
                                                         <span className="theme-boximg-color" />
                                                         <div className="box-readmore">
@@ -883,9 +925,8 @@ const MainContent = () => {
                                                 }}
                                               >
                                                 <span className="title-text">
-                                                  Programming certifications to
-                                                  improve your job and career
-                                                  prospects
+                                                  Kho tài liệu phong phú giúp
+                                                  bạn học hiệu quả hơn
                                                 </span>
                                               </h4>
                                             </div>
@@ -897,15 +938,15 @@ const MainContent = () => {
                                               }}
                                             >
                                               <p>
-                                                Phasellus condimentum sem ut
-                                                nisi rhoncus, non dignissim est
-                                                lacinia. Suspendisse quis nibh
-                                                euismod, vulputate nisl sit
-                                                amet, aliquet purus. Integer
-                                                sagittis augue tortor, id
-                                                molestie dui ornare quis.
-                                                Vestibulum id enim varius dui
-                                                gravida tincidunt.
+                                                Tổng hợp đầy đủ giáo trình, bài
+                                                giảng và tài liệu tham khảo về
+                                                triết học Mác - Lênin. Nội dung
+                                                được trình bày rõ ràng, dễ hiểu
+                                                với nhiều ví dụ thực tế. Bạn có
+                                                thể tải về và học mọi lúc mọi
+                                                nơi, thuận tiện cho việc ôn tập
+                                                và nghiên cứu sâu các vấn đề
+                                                triết học.
                                               </p>
                                               <img
                                                 alt="demo_certificates.png"
@@ -932,7 +973,7 @@ const MainContent = () => {
                                                     "rgb(                                                        41,                                                        25,                                                        165                                                      )",
                                                 }}
                                               >
-                                                Request info
+                                                Vào xem thử
                                               </a>
                                             </div>
                                           </div>
@@ -960,594 +1001,6 @@ const MainContent = () => {
                                         </div>
                                       </div>
                                     </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div
-                            className="mb2-pb-row pre-bg0 light bgfixed0 wave-none va0 bgfixed0 wavefliph0 wavepos0 colgutter-s parallax0 heroimg0 herovcenter herogradl0 herogradr0 bgtextmob0 waveover1 heroonsmall1 bordert0 borderb0 borderfw1 obgimg1 heroisvideo isfw0 nobg rowpt-50 rowpb-50"
-                            style={{
-                              "--mb-pb-row_bbcolor": "#dddddd",
-                              "--mb-pb-row_bbw": "1px",
-                              "--mb-pb-row_btcolor": "#dddddd",
-                              "--mb-pb-row_btw": "1px",
-                              "--mb-pb-row_pb": "50px",
-                              "--mb-pb-row_pt": "50px",
-                              marginTop: "0px",
-                            }}
-                          >
-                            <div className="section-inner mb2-pb-row-inner">
-                              <div className="row-topgap w-100" />
-                              <div className="container-fluid">
-                                <div className="row">
-                                  <div className="mb2-pb-column col-lg-12 noempty light align-none aligncnone mobcenter0 moborder0">
-                                    <div
-                                      className="column-inner"
-                                      style={{
-                                        maxWidth: "2000px",
-                                        paddingBottom: "30px",
-                                      }}
-                                    >
-                                      <div className="clearfix">
-                                        <h4
-                                          className="heading heading-none upper0 fwglobal lhglobal pbtsize-2"
-                                          id="typed_69724aa544919"
-                                          style={{
-                                            "--mb2-pb-heading-tbshadow": "0px",
-                                            "--mb2-pb-heading-tcshadow":
-                                              "transparent",
-                                            "--mb2-pb-heading-thshadow":
-                                              "0.06em",
-                                            "--mb2-pb-heading-tvshadow":
-                                              "0.04em",
-                                            fontSize: "2.3rem",
-                                            marginBottom: "50px",
-                                            marginLeft: "auto",
-                                            marginRight: "auto",
-                                            marginTop: "0px",
-                                            maxWidth: "2000px",
-                                          }}
-                                        >
-                                          <span className="headingtext fwglobal nline0">
-                                            Most popular courses
-                                          </span>
-                                        </h4>
-                                        <div
-                                          className="mb2-pb-content mb2-pb-courses clearfix prestylenone"
-                                          data-animtime="450"
-                                          data-animtype="slide"
-                                          data-autoplay="0"
-                                          data-columns="4"
-                                          data-gutter="normal"
-                                          data-i2load="courses"
-                                          data-lang_next="Next slide"
-                                          data-lang_pagination="Go to slide"
-                                          data-lang_prev="Previous slide"
-                                          data-lang_slide="slide"
-                                          data-margin="30"
-                                          data-mobcolumns="0"
-                                          data-options="%7B%22limit%22%3A%228%22%2C%22catids%22%3A%22%22%2C%22courseids%22%3A%22%22%2C%22excourses%22%3A%220%22%2C%22tagids%22%3A%22%22%2C%22extags%22%3A%220%22%2C%22instids%22%3A%22%22%2C%22exinst%22%3A%220%22%2C%22lazy%22%3A0%2C%22mobcolumns%22%3A0%2C%22excats%22%3A%220%22%2C%22carousel%22%3A%221%22%2C%22columns%22%3A%224%22%2C%22sdots%22%3A%220%22%2C%22sloop%22%3A%220%22%2C%22snav%22%3A%221%22%2C%22sautoplay%22%3A1%2C%22autoplay%22%3A%220%22%2C%22spausetime%22%3A5000%2C%22pausetime%22%3A%225000%22%2C%22sanimate%22%3A600%2C%22animtime%22%3A%22450%22%2C%22desclimit%22%3A%2225%22%2C%22titlelimit%22%3A%226%22%2C%22gridwidth%22%3A%22normal%22%2C%22gutter%22%3A%22normal%22%2C%22linkbtn%22%3A%220%22%2C%22btntext%22%3A%22%22%2C%22prestyle%22%3A%22none%22%2C%22custom_class%22%3A%22%22%2C%22colors%22%3A%22%22%2C%22cistyle%22%3A%22la%22%2C%22crounded%22%3A%220%22%2C%22mt%22%3A%220%22%2C%22mb%22%3A%2230%22%2C%22coursestudentscount%22%3A%221%22%2C%22coursinstructor%22%3A%221%22%2C%22courseprice%22%3A%221%22%2C%22touchmove%22%3A0%7D"
-                                          data-pausetime="5000"
-                                          data-sdots="0"
-                                          data-sesskey="E1VhFrTnr9"
-                                          data-sloop="0"
-                                          data-snav="1"
-                                          data-touchmove="0"
-                                          style={{
-                                            marginBottom: "30px",
-                                          }}
-                                        >
-                                          <div
-                                            className="mb2-pb-content-inner clearfix swiper"
-                                            id="swiper_69724aa544933"
-                                          >
-                                            <div className="theme-carousel-nav">
-                                              <button
-                                                aria-label="Prev"
-                                                className="swiper-button-nav swiper-button-prev swiper-prevjs_swiper_69724aa544933 d-inline-flex justify-content-center align-items-center themereset"
-                                                type="button"
-                                              />
-                                              <button
-                                                aria-label="Next"
-                                                className="swiper-button-nav swiper-button-next swiper-nextjs_swiper_69724aa544933 d-inline-flex justify-content-center align-items-center themereset"
-                                                type="button"
-                                              />
-                                            </div>
-                                            <div className="theme-carousel-pagenavnav">
-                                              <div className="swiper-pagination" />
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div
-                            className="mb2-pb-row pre-bg0 dark bgfixed0 wave-none va0 bgfixed0 wavefliph0 wavepos0 colgutter-s parallax0 heroimg0 herovcenter herogradl0 herogradr0 bgtextmob0 waveover1 heroonsmall1 bordert0 borderb0 borderfw1 obgimg0 heroisvideo isfw0 lazy isbg rowpt-100 rowpb-50"
-                            data-bg="https://lmsstyle.com/theme/new-learning/theme/image.php/mb2nl/local_mb2builder/1722369476/sample-data/2024/07/bg_shape_white"
-                            style={{
-                              "--mb-pb-row_bbcolor": "#dddddd",
-                              "--mb-pb-row_bbw": "1px",
-                              "--mb-pb-row_bgcolor": "rgb(54, 38, 178)",
-                              "--mb-pb-row_btcolor": "#dddddd",
-                              "--mb-pb-row_btw": "1px",
-                              "--mb-pb-row_pb": "50px",
-                              "--mb-pb-row_pt": "110px",
-                              marginTop: "0px",
-                            }}
-                          >
-                            <div className="section-inner mb2-pb-row-inner">
-                              <div className="row-topgap w-100" />
-                              <div className="container-fluid">
-                                <div className="row">
-                                  <div className="mb2-pb-column col-lg-12 noempty light align-none aligncnone mobcenter0 moborder0">
-                                    <div
-                                      className="column-inner"
-                                      style={{
-                                        maxWidth: "2000px",
-                                        paddingBottom: "30px",
-                                      }}
-                                    >
-                                      <div className="clearfix">
-                                        <h4
-                                          className="heading heading-none upper0 fwglobal lhglobal pbtsize-2"
-                                          id="typed_69724aa544ad4"
-                                          style={{
-                                            "--mb2-pb-heading-tbshadow": "0px",
-                                            "--mb2-pb-heading-tcshadow":
-                                              "transparent",
-                                            "--mb2-pb-heading-thshadow":
-                                              "0.06em",
-                                            "--mb2-pb-heading-tvshadow":
-                                              "0.04em",
-                                            fontSize: "2.3rem",
-                                            marginBottom: "50px",
-                                            marginLeft: "auto",
-                                            marginRight: "auto",
-                                            marginTop: "0px",
-                                            maxWidth: "2000px",
-                                          }}
-                                        >
-                                          <span className="headingtext fwglobal nline0">
-                                            Most popular courses
-                                          </span>
-                                        </h4>
-                                        <div className="theme-boxes theme-boxesicon type-6 gutter-normal theme-col-4 smtitle1 rounded0 wave0 paddingm linkbtn1 btnhor0 theme-boxesicon shadow0 itemlink0 tcenter0 boxcolor-primary center0 clearfix">
-                                          <div className="theme-box">
-                                            <div className="theme-boxicon position-relative">
-                                              <div className="theme-boxicon-inner">
-                                                <div className="theme-boxicon-icon">
-                                                  <i className="bi bi-hand-thumbs-up" />
-                                                </div>
-                                                <div className="theme-boxicon-content">
-                                                  <h4
-                                                    className="box-title m-0 fwglobal lhglobal pbtsize-1"
-                                                    style={{
-                                                      fontSize: "1.4rem",
-                                                    }}
-                                                  >
-                                                    Learn from Industry experts
-                                                  </h4>
-                                                  <div className="box-desc">
-                                                    Curabitur aliquet quam id
-                                                    posuere blandit. Vestibulum
-                                                    ac diam sit.
-                                                  </div>
-                                                  <div className="box-readmore">
-                                                    <a
-                                                      className="arrowlink"
-                                                      href="#"
-                                                      style={{
-                                                        "--mb2-pb-btn-color":
-                                                          "rgb(                                                              255,                                                              178,                                                              0                                                            )",
-                                                        "--mb2-pb-btn-hcolor":
-                                                          "rgb(                                                              242,                                                              165,                                                              0                                                            )",
-                                                      }}
-                                                    >
-                                                      Read more
-                                                    </a>
-                                                  </div>
-                                                </div>
-                                              </div>
-                                              <div className="bigicon d-none">
-                                                <i className="bi bi-hand-thumbs-up" />
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <div className="theme-box">
-                                            <div className="theme-boxicon position-relative">
-                                              <div className="theme-boxicon-inner">
-                                                <div className="theme-boxicon-icon">
-                                                  <i className="bi bi-lightbulb" />
-                                                </div>
-                                                <div className="theme-boxicon-content">
-                                                  <h4
-                                                    className="box-title m-0 fwglobal lhglobal pbtsize-1"
-                                                    style={{
-                                                      fontSize: "1.4rem",
-                                                    }}
-                                                  >
-                                                    Share knowledge and ideas
-                                                  </h4>
-                                                  <div className="box-desc">
-                                                    Curabitur aliquet quam dui
-                                                    posuere blandit. Vestibulum
-                                                    ac diam.
-                                                  </div>
-                                                  <div className="box-readmore">
-                                                    <a
-                                                      className="arrowlink"
-                                                      href="#"
-                                                      style={{
-                                                        "--mb2-pb-btn-color":
-                                                          "rgb(                                                              255,                                                              178,                                                              0                                                            )",
-                                                        "--mb2-pb-btn-hcolor":
-                                                          "rgb(                                                              242,                                                              165,                                                              0                                                            )",
-                                                      }}
-                                                    >
-                                                      Read more
-                                                    </a>
-                                                  </div>
-                                                </div>
-                                              </div>
-                                              <div className="bigicon d-none">
-                                                <i className="bi bi-lightbulb" />
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <div className="theme-box">
-                                            <div className="theme-boxicon position-relative">
-                                              <div className="theme-boxicon-inner">
-                                                <div className="theme-boxicon-icon">
-                                                  <i className="bi bi-cup-hot" />
-                                                </div>
-                                                <div className="theme-boxicon-content">
-                                                  <h4
-                                                    className="box-title m-0 fwglobal lhglobal pbtsize-1"
-                                                    style={{
-                                                      fontSize: "1.4rem",
-                                                    }}
-                                                  >
-                                                    Learn at your own pace
-                                                  </h4>
-                                                  <div className="box-desc">
-                                                    Curabitur aliquet quam dui
-                                                    posuere blandit. Vestibulum
-                                                    ac diam.
-                                                  </div>
-                                                  <div className="box-readmore">
-                                                    <a
-                                                      className="arrowlink"
-                                                      href="#"
-                                                      style={{
-                                                        "--mb2-pb-btn-color":
-                                                          "rgb(                                                              255,                                                              178,                                                              0                                                            )",
-                                                        "--mb2-pb-btn-hcolor":
-                                                          "rgb(                                                              242,                                                              165,                                                              0                                                            )",
-                                                      }}
-                                                    >
-                                                      Read more
-                                                    </a>
-                                                  </div>
-                                                </div>
-                                              </div>
-                                              <div className="bigicon d-none">
-                                                <i className="bi bi-cup-hot" />
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <div className="theme-box">
-                                            <div className="theme-boxicon position-relative">
-                                              <div className="theme-boxicon-inner">
-                                                <div className="theme-boxicon-icon">
-                                                  <i className="bi bi-award" />
-                                                </div>
-                                                <div className="theme-boxicon-content">
-                                                  <h4
-                                                    className="box-title m-0 fwglobal lhglobal pbtsize-1"
-                                                    style={{
-                                                      fontSize: "1.4rem",
-                                                    }}
-                                                  >
-                                                    Earn a certificate with
-                                                    every course
-                                                  </h4>
-                                                  <div className="box-desc">
-                                                    Curabitur aliquet quam dui
-                                                    posuere blandit. Vestibulum
-                                                    ac diam.
-                                                  </div>
-                                                  <div className="box-readmore">
-                                                    <a
-                                                      className="arrowlink"
-                                                      href="#"
-                                                      style={{
-                                                        "--mb2-pb-btn-color":
-                                                          "rgb(                                                              255,                                                              178,                                                              0                                                            )",
-                                                        "--mb2-pb-btn-hcolor":
-                                                          "rgb(                                                              242,                                                              165,                                                              0                                                            )",
-                                                      }}
-                                                    >
-                                                      Read more
-                                                    </a>
-                                                  </div>
-                                                </div>
-                                              </div>
-                                              <div className="bigicon d-none">
-                                                <i className="bi bi-award" />
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div
-                            className="mb2-pb-row pre-bg0 light bgfixed0 wave-none va0 bgfixed0 wavefliph0 wavepos0 colgutter-s parallax0 heroimg1 herovcenter herogradl0 herogradr0 bgtextmob0 waveover1 heroonsmall0 bordert0 borderb0 borderfw1 obgimg1 heroisimg isfw0 nobg rowpt-100 rowpb-50"
-                            style={{
-                              "--mb-pb-row_bbcolor": "#dddddd",
-                              "--mb-pb-row_bbw": "1px",
-                              "--mb-pb-row_btcolor": "#dddddd",
-                              "--mb-pb-row_btw": "1px",
-                              "--mb-pb-row_pb": "50px",
-                              "--mb-pb-row_pt": "110px",
-                              marginTop: "0px",
-                            }}
-                          >
-                            <div className="section-inner mb2-pb-row-inner">
-                              <div className="row-topgap w-100" />
-                              <div className="container-fluid">
-                                <div className="row">
-                                  <div className="mb2-pb-column col-lg-12 noempty light align-none aligncnone mobcenter0 moborder0">
-                                    <div
-                                      className="column-inner"
-                                      style={{
-                                        maxWidth: "657px",
-                                        paddingBottom: "30px",
-                                      }}
-                                    >
-                                      <div className="clearfix">
-                                        <div
-                                          className="theme-text"
-                                          style={{
-                                            marginLeft: "auto",
-                                            marginRight: "auto",
-                                            maxWidth: "2000px",
-                                          }}
-                                        >
-                                          <div
-                                            className="theme-text-inner align-none text-rgb(0, 180, 216) rounded0 gradient0 light"
-                                            style={{
-                                              "--mb2-pb-graddeg": "180deg",
-                                            }}
-                                          >
-                                            <div
-                                              className="theme-text-text upper0 fwbold lhglobal"
-                                              style={{
-                                                color: "rgb(0, 180, 216)",
-                                                fontSize: "1rem",
-                                              }}
-                                            >
-                                              <p>
-                                                Mattis pretium erat torquent
-                                                fermentum?
-                                              </p>
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <h4
-                                          className="heading heading-none upper0 fwglobal lhglobal pbtsize-2"
-                                          id="typed_69724aa544c2f"
-                                          style={{
-                                            "--mb2-pb-heading-tbshadow": "0px",
-                                            "--mb2-pb-heading-tcshadow":
-                                              "transparent",
-                                            "--mb2-pb-heading-thshadow":
-                                              "0.06em",
-                                            "--mb2-pb-heading-tvshadow":
-                                              "0.04em",
-                                            fontSize: "2.3rem",
-                                            marginBottom: "30px",
-                                            marginLeft: "auto",
-                                            marginRight: "auto",
-                                            marginTop: "0px",
-                                            maxWidth: "2000px",
-                                          }}
-                                        >
-                                          <span className="headingtext fwglobal nline0">
-                                            Get started with New Learning
-                                          </span>
-                                        </h4>
-                                        <div
-                                          className="theme-text"
-                                          style={{
-                                            marginBottom: "30px",
-                                            marginLeft: "auto",
-                                            marginRight: "auto",
-                                            maxWidth: "1994px",
-                                          }}
-                                        >
-                                          <div
-                                            className="theme-text-inner align-none text- rounded0 gradient0 light"
-                                            style={{
-                                              "--mb2-pb-graddeg": "180deg",
-                                            }}
-                                          >
-                                            <div
-                                              className="theme-text-text upper0 fwglobal lhglobal"
-                                              style={{
-                                                fontSize: "1rem",
-                                              }}
-                                            >
-                                              <p>
-                                                Dictumst vivamus donec faucibus
-                                                lectus arcu hendrerit. Facilisis
-                                                porttitor congue odio blandit
-                                                luctus? Pulvinar, arcu convallis
-                                                nec porttitor interdum dictumst.
-                                                Cursus blandit ullamcorper erat.
-                                                Curabitur laoreet scelerisque
-                                                fringilla.
-                                              </p>
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <div
-                                          className="mb2-pb-listicon"
-                                          style={{
-                                            marginBottom: "40px",
-                                          }}
-                                        >
-                                          <ul
-                                            className="theme-listicon mb2-pb-sortable-subelements iconbg1 horizontal2 border0 fwbold alignnone"
-                                            style={{
-                                              "--mb2-pb-listicon-fs": "1rem",
-                                              "--mb2-pb-listicon-isize":
-                                                "2.65rem",
-                                              "--mb2-pb-listicon-space":
-                                                "1.93rem",
-                                            }}
-                                          >
-                                            <li className="mb2-pb-listicon_item">
-                                              <div className="item-content">
-                                                <span
-                                                  className="iconel d-inline-flex justify-content-center align-items-center"
-                                                  style={{
-                                                    backgroundColor:
-                                                      "rgb(                                                          255,                                                          178,                                                          0                                                        )",
-                                                    color: "rgb(54, 38, 178)",
-                                                  }}
-                                                >
-                                                  <i className="bi bi-check-lg" />
-                                                </span>
-                                                <span
-                                                  className="list-text"
-                                                  style={{
-                                                    color: "rgb(32, 36, 39)",
-                                                  }}
-                                                >
-                                                  A broad and robust
-                                                  understanding of programming.
-                                                </span>
-                                              </div>
-                                            </li>
-                                            <li className="mb2-pb-listicon_item">
-                                              <div className="item-content">
-                                                <span
-                                                  className="iconel d-inline-flex justify-content-center align-items-center"
-                                                  style={{
-                                                    backgroundColor:
-                                                      "rgb(                                                          255,                                                          178,                                                          0                                                        )",
-                                                    color: "rgb(54, 38, 178)",
-                                                  }}
-                                                >
-                                                  <i className="bi bi-check-lg" />
-                                                </span>
-                                                <span
-                                                  className="list-text"
-                                                  style={{
-                                                    color: "rgb(32, 36, 39)",
-                                                  }}
-                                                >
-                                                  Experience sample mentorship
-                                                  sessions with data science
-                                                  experts.
-                                                </span>
-                                              </div>
-                                            </li>
-                                            <li className="mb2-pb-listicon_item">
-                                              <div className="item-content">
-                                                <span
-                                                  className="iconel d-inline-flex justify-content-center align-items-center"
-                                                  style={{
-                                                    backgroundColor:
-                                                      "rgb(                                                          255,                                                          178,                                                          0                                                        )",
-                                                    color: "rgb(54, 38, 178)",
-                                                  }}
-                                                >
-                                                  <i className="bi bi-check-lg" />
-                                                </span>
-                                                <span
-                                                  className="list-text"
-                                                  style={{
-                                                    color: "rgb(32, 36, 39)",
-                                                  }}
-                                                >
-                                                  Developing problem-solving
-                                                  skills using programming
-                                                  languages.
-                                                </span>
-                                              </div>
-                                            </li>
-                                            <li className="mb2-pb-listicon_item">
-                                              <div className="item-content">
-                                                <span
-                                                  className="iconel d-inline-flex justify-content-center align-items-center"
-                                                  style={{
-                                                    backgroundColor:
-                                                      "rgb(                                                          255,                                                          178,                                                          0                                                        )",
-                                                    color: "rgb(54, 38, 178)",
-                                                  }}
-                                                >
-                                                  <i className="bi bi-check-lg" />
-                                                </span>
-                                                <span
-                                                  className="list-text"
-                                                  style={{
-                                                    color: "rgb(32, 36, 39)",
-                                                  }}
-                                                >
-                                                  Mastering syntax and
-                                                  programming concepts.
-                                                </span>
-                                              </div>
-                                            </li>
-                                          </ul>
-                                        </div>
-                                        <a
-                                          className="mb2-pb-btn typeprimary sizexlg rounded-1 btnborder0 isicon0 upper0 fwglobal iafter0"
-                                          href="#"
-                                          style={{
-                                            "--mb2-pb-btn-bgcolor":
-                                              "rgb(                                                  54,                                                  38,                                                  178                                                )",
-                                            "--mb2-pb-btn-bghcolor":
-                                              "rgb(                                                  41,                                                  25,                                                  165                                                )",
-                                            marginBottom: "30px",
-                                          }}
-                                        >
-                                          <span className="btn-intext">
-                                            Read more
-                                          </span>
-                                        </a>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div aria-hidden="true" className="hero-img-wrap">
-                                <div className="hero-img-wrap2">
-                                  <div
-                                    className="hero-img-wrap3"
-                                    style={{
-                                      "--mb2-pb-herovm": "0px",
-                                      right: "-3%",
-                                      width: "540px",
-                                    }}
-                                  >
-                                    <img
-                                      alt=""
-                                      className="hero-img lazy"
-                                      data-src="https://lmsstyle.com/theme/new-learning/pluginfile.php/1/local_mb2builder/images/programming_hero_03.png"
-                                      src="https://lmsstyle.com/theme/new-learning/theme/image.php/mb2nl/theme/1768588523/lazy_placeholder_big"
-                                    />
                                   </div>
                                 </div>
                               </div>

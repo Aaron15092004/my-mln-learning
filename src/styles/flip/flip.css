@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 .flip-game-container *,
 .flip-game-container *::before,
@@ -59,8 +59,7 @@
 .flip-game-container {
   margin: 0;
   font:
-    normal 0/0 Arial,
-    Helvetica,
+    normal 0/0 "Lexend",
     sans-serif;
   background-image: url("../../assets/images/flip/bg.jpg");
   background-repeat: no-repeat;
@@ -114,7 +113,7 @@
   text-decoration: none;
   color: #fff;
   display: block;
-  font: bold 18px/75px "Open Sans";
+  font: bold 18px/75px "Lexend";
   text-transform: uppercase;
   text-align: center;
   padding: 0;
@@ -156,7 +155,7 @@
 
 .flip-game-container .share-title {
   font-size: 11px;
-  font-family: arial;
+  font-family: "Lexend", sans-serif;
   font-weight: bold;
   text-transform: uppercase;
   width: 50px;
@@ -202,7 +201,7 @@
   width: 100%;
   height: auto;
   float: left;
-  font-family: arial, Helvetica, sans-serif;
+  font-family: "Lexend", sans-serif;
   font-size: 12px;
   font-weight: normal;
   color: #ffffff;
@@ -292,7 +291,7 @@
 }
 
 .flip-game-container .game-logo .game-front {
-  font: normal 130px/225px "Open Sans";
+  font: normal 130px/225px "Lexend";
   text-align: center;
   text-transform: uppercase;
 }
@@ -306,7 +305,7 @@
 
 .flip-game-container .game-logo .content-box {
   width: 200%;
-  font: normal 12px/16px "Open Sans";
+  font: normal 12px/16px "Lexend";
   text-align: left;
 }
 
@@ -316,6 +315,10 @@
 
 .flip-game-container .game-logo .content-box .padded {
   padding: 0 15px;
+}
+
+.flip-game-container .game-logo .content-box .padded h2 {
+  color: white;
 }
 
 .flip-game-container .game-logo .content-box h2 {
@@ -333,7 +336,7 @@
 .flip-game-container .stats-container h2 i {
   margin-right: 10px;
   vertical-align: top;
-  font: italic normal 9px/8px "Open Sans";
+  font: italic normal 9px/8px "Lexend";
   color: rgba(255, 255, 255, 0.4);
 }
 
@@ -426,7 +429,7 @@
   top: 50%;
   background: #c0392b;
   color: #fff;
-  font: bold 80px/200px "Open Sans";
+  font: bold 80px/200px "Lexend";
   display: block;
   text-align: center;
 }
@@ -830,7 +833,7 @@
     margin-top: -25px;
   }
   .flip-game-container .game-logo .game-front {
-    font: normal 80px/150px "Open Sans";
+    font: normal 80px/150px "Lexend";
   }
   .flip-game-container .game-logo .content-box h2 {
     font-size: 16px;

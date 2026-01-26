@@ -690,7 +690,7 @@ export function khoangCachCung(cung1, cung2, chieu = 1) {
 export function timCuc(viTriCungMenhTrenDiaBan, canNamSinh) {
   const canThangGieng = (canNamSinh * 2 + 1) % 10;
   let canThangMenh =
-    (((viTriCungMenhTrenDiaBan - 3) % 12) + canThangGieng) % 10;
+    (((viTriCungMenhTrenDiaBan - 3 + 12) % 12) + canThangGieng) % 10;
   if (canThangMenh === 0) {
     canThangMenh = 10;
   }

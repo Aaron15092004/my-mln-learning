@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import { lapDiaBan } from "../utils/lapDiaBan";
 import {
   thienCan,
@@ -31,20 +32,22 @@ const TuviPage = () => {
   // Khởi tạo Vanta.js effect
   useEffect(() => {
     if (!vantaEffect.current && vantaRef.current && window.VANTA) {
+      const isMobile = window.innerWidth <= 768;
+
       vantaEffect.current = window.VANTA.NET({
         el: vantaRef.current,
         mouseControls: true,
         touchControls: true,
         gyroControls: false,
-        minHeight: 900.0,
+        minHeight: isMobile ? 100.0 : 600.0,
         minWidth: 200.0,
         scale: 1.0,
         scaleMobile: 1.0,
-        color: 0x3f51b5, // Màu chính
-        backgroundColor: 0x23153c, // Màu nền
-        points: 10.0, // Số điểm
-        maxDistance: 20.0, // Khoảng cách tối đa
-        spacing: 15.0, // Khoảng cách giữa các điểm
+        color: 0x3f51b5,
+        backgroundColor: 0x23153c,
+        points: 10.0,
+        maxDistance: 20.0,
+        spacing: 15.0,
       });
     }
 
@@ -78,6 +81,8 @@ const TuviPage = () => {
         duongLich,
         parseInt(formData.muigio),
       );
+
+      console.log(diaBan);
 
       let ngayAm = parseInt(formData.ngaysinh);
       let thangAm = parseInt(formData.thangsinh);
@@ -142,7 +147,7 @@ const TuviPage = () => {
         canNgay: thienCan[canNgay]?.tenCan || "",
         chiNgay: diaChi[chiNgay]?.tenChi || "",
         canThang: thienCan[canThang]?.tenCan || "",
-        chiThang: diaChi[thangAm]?.tenChi || "",
+        chiThang: diaChi[((thangAm + 1) % 12) + 1]?.tenChi || "",
         canNamTen: thienCan[canNam]?.tenCan || "",
         chiNamTen: diaChi[chiNam]?.tenChi || "",
         gioSinh: `${thienCan[canGioSinh]?.tenCan || ""} ${chiGioSinh?.tenChi || ""}`,
@@ -293,10 +298,10 @@ const TuviPage = () => {
           <div className="col col-3 cotTrai">Ngày sinh</div>
           <div className="col col-9 cotPhai">
             <div>
-              {tb.ngayAm}/{tb.thangAm}/{tb.canNamTen} {tb.chiNamTen} (Âm lịch)
+              {tb.ngayDuong}/{tb.thangDuong}/{tb.namDuong} (Dương lịch)
             </div>
             <div>
-              {tb.ngayDuong}/{tb.thangDuong}/{tb.namDuong} (Dương lịch)
+              {tb.ngayAm}/{tb.thangAm}/{tb.canNamTen} {tb.chiNamTen} (Âm lịch)
             </div>
           </div>
         </div>
@@ -341,7 +346,12 @@ const TuviPage = () => {
     <div className="tuvi-container-wrapper" ref={vantaRef}>
       <div className="masthead">
         <div className="container-2">
-          <h1 className="wordmark">Chương trình lập lá số tử vi</h1>
+          <Link to="/">
+            <button className="back-home">
+              <span className="text">Back Home</span>
+            </button>
+          </Link>
+          <h1 className="wordmark">Mời bạn Lập lá số tử vi</h1>
           <div className="formborder">
             <form id="lstv" onSubmit={(e) => e.preventDefault()}>
               <div className="grid thongtin">
@@ -374,42 +384,56 @@ const TuviPage = () => {
 
               <div className="grid thongtin">
                 <div className="col col-3 text-white">Ngày tháng năm sinh</div>
-                <div className="col col-5">
-                  <select
-                    name="ngaysinh"
-                    id="ngaysinh"
-                    value={formData.ngaysinh}
-                    onChange={handleChange}
-                  >
-                    {[...Array(31)].map((_, i) => (
-                      <option key={i + 1} value={i + 1}>
-                        {i + 1}
-                      </option>
-                    ))}
-                  </select>{" "}
-                  /
-                  <select
-                    name="thangsinh"
-                    id="thangsinh"
-                    value={formData.thangsinh}
-                    onChange={handleChange}
-                  >
-                    {[...Array(12)].map((_, i) => (
-                      <option key={i + 1} value={i + 1}>
-                        {i + 1}
-                      </option>
-                    ))}
-                  </select>{" "}
-                  /
-                  <input
-                    type="text"
-                    id="namsinh"
-                    name="namsinh"
-                    placeholder="Năm sinh"
-                    value={formData.namsinh}
-                    onChange={handleChange}
-                  />
+                <div className="col col-9">
+                  <div className="grid thongtinngaysinh">
+                    <select
+                      className="col col-4"
+                      name="ngaysinh"
+                      id="ngaysinh"
+                      value={formData.ngaysinh}
+                      onChange={handleChange}
+                    >
+                      {[...Array(31)].map((_, i) => (
+                        <option key={i + 1} value={i + 1}>
+                          {i + 1}
+                        </option>
+                      ))}
+                    </select>
+                    <select
+                      className="col col-4"
+                      name="thangsinh"
+                      id="thangsinh"
+                      value={formData.thangsinh}
+                      onChange={handleChange}
+                    >
+                      {[...Array(12)].map((_, i) => (
+                        <option key={i + 1} value={i + 1}>
+                          {i + 1}
+                        </option>
+                      ))}
+                    </select>
+                    <select
+                      className="col col-4"
+                      name="namsinh"
+                      id="namsinh"
+                      value={formData.namsinh}
+                      onChange={handleChange}
+                    >
+                      {Array.from(
+                        { length: 100 },
+                        (_, i) => new Date().getFullYear() - i,
+                      ).map((year) => (
+                        <option key={year} value={year}>
+                          {year}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 </div>
+              </div>
+
+              <div className="grid thongtin">
+                <div className="col col-3 text-white"></div>
                 <div className="col col-4 text-white">
                   Âm lịch?
                   <input
@@ -444,8 +468,8 @@ const TuviPage = () => {
                     <option value="12">Hợi (21g - 23g)</option>
                   </select>
                 </div>
+                <div className="col col-3 text-white">Múi giờ:</div>
                 <div className="col col-3 text-white">
-                  Múi giờ:
                   <select
                     name="muigio"
                     id="muigio"
@@ -493,117 +517,136 @@ const TuviPage = () => {
           </div>
         </div>
       </div>
-
       {laSo && (
-        <div
-          className="anlaso laso border"
-          id="laso"
-          style={{ display: "block" }}
-        >
-          <div className="grid">
-            <div className="col col-3">
-              <div className="container-2">
-                <div
-                  className="grid diaCung border-bottom"
-                  data-cung-id="6"
-                  id="cungTy5"
-                >
-                  {renderCung(laSo.thapNhiCung[6])}
-                </div>
-                <div
-                  className="grid diaCung border-bottom"
-                  data-cung-id="5"
-                  id="cungThin"
-                >
-                  {renderCung(laSo.thapNhiCung[5])}
-                </div>
-                <div
-                  className="grid diaCung border-bottom inset-border"
-                  data-cung-id="4"
-                  id="cungMao"
-                >
-                  {renderCung(laSo.thapNhiCung[4])}
-                </div>
-                <div className="grid diaCung" data-cung-id="3" id="cungDan">
-                  {renderCung(laSo.thapNhiCung[3])}
-                </div>
-              </div>
-            </div>
-
-            <div className="col col-6">
-              <div className="container-2">
+        <div className="container my-5">
+          <div className="card shadow-lg rounded-4">
+            <div
+              className="card-body p-5"
+              style={{
+                boxShadow: `
+    0 0 10px rgba(255,255,255,.6),
+    0 0 25px rgba(120,150,255,.8),
+    0 0 50px rgba(120,150,255,1),
+    0 0 80px rgba(120,150,255,1)
+  `,
+              }}
+            >
+              <div
+                className="anlaso laso"
+                id="laso"
+                style={{ display: "block" }}
+              >
                 <div className="grid">
-                  <div
-                    className="col col-6 diaCung border-left"
-                    data-cung-id="7"
-                    id="cungNgo"
-                  >
-                    {renderCung(laSo.thapNhiCung[7])}
+                  <div className="col col-3">
+                    <div className="container-2">
+                      <div
+                        className="grid diaCung border-bottom"
+                        data-cung-id="6"
+                        id="cungTy5"
+                      >
+                        {renderCung(laSo.thapNhiCung[6])}
+                      </div>
+                      <div
+                        className="grid diaCung border-bottom"
+                        data-cung-id="5"
+                        id="cungThin"
+                      >
+                        {renderCung(laSo.thapNhiCung[5])}
+                      </div>
+                      <div
+                        className="grid diaCung border-bottom inset-border"
+                        data-cung-id="4"
+                        id="cungMao"
+                      >
+                        {renderCung(laSo.thapNhiCung[4])}
+                      </div>
+                      <div
+                        className="grid diaCung"
+                        data-cung-id="3"
+                        id="cungDan"
+                      >
+                        {renderCung(laSo.thapNhiCung[3])}
+                      </div>
+                    </div>
                   </div>
-                  <div
-                    className="col col-6 diaCung border-left"
-                    data-cung-id="8"
-                    id="cungMui"
-                  >
-                    {renderCung(laSo.thapNhiCung[8])}
-                  </div>
-                </div>
 
-                <div
-                  className="grid thienBan border-top border-left border-bottom border-right"
-                  id="thienBan"
-                >
-                  {renderThienBan()}
-                </div>
+                  <div className="col col-6">
+                    <div className="container-2">
+                      <div className="grid">
+                        <div
+                          className="col col-6 diaCung border-left"
+                          data-cung-id="7"
+                          id="cungNgo"
+                        >
+                          {renderCung(laSo.thapNhiCung[7])}
+                        </div>
+                        <div
+                          className="col col-6 diaCung border-left"
+                          data-cung-id="8"
+                          id="cungMui"
+                        >
+                          {renderCung(laSo.thapNhiCung[8])}
+                        </div>
+                      </div>
 
-                <div className="grid">
-                  <div
-                    className="col col-6 diaCung border-left"
-                    data-cung-id="2"
-                    id="cungSuu"
-                  >
-                    {renderCung(laSo.thapNhiCung[2])}
-                  </div>
-                  <div
-                    className="col col-6 diaCung border-left"
-                    data-cung-id="1"
-                    id="cungTy1"
-                  >
-                    {renderCung(laSo.thapNhiCung[1])}
-                  </div>
-                </div>
-              </div>
-            </div>
+                      <div
+                        className="grid thienBan border-top border-left border-bottom border-right"
+                        id="thienBan"
+                      >
+                        {renderThienBan()}
+                      </div>
 
-            <div className="col col-3">
-              <div className="container-2">
-                <div
-                  className="grid diaCung border-left border-bottom"
-                  data-cung-id="9"
-                  id="cungThan"
-                >
-                  {renderCung(laSo.thapNhiCung[9])}
-                </div>
-                <div
-                  className="grid diaCung border-bottom"
-                  data-cung-id="10"
-                  id="cungDau"
-                >
-                  {renderCung(laSo.thapNhiCung[10])}
-                </div>
-                <div
-                  className="grid diaCung border-bottom"
-                  data-cung-id="11"
-                  id="cungTuat"
-                >
-                  {renderCung(laSo.thapNhiCung[11])}
-                </div>
-                <div
-                  className="grid diaCung border-left"
-                  data-cung-id="12"
-                  id="cungHoi"
-                >
-                  {renderCung(laSo.thapNhiCung[12])}
+                      <div className="grid">
+                        <div
+                          className="col col-6 diaCung border-left"
+                          data-cung-id="2"
+                          id="cungSuu"
+                        >
+                          {renderCung(laSo.thapNhiCung[2])}
+                        </div>
+                        <div
+                          className="col col-6 diaCung border-left"
+                          data-cung-id="1"
+                          id="cungTy1"
+                        >
+                          {renderCung(laSo.thapNhiCung[1])}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="col col-3">
+                    <div className="container-2">
+                      <div
+                        className="grid diaCung border-left border-bottom"
+                        data-cung-id="9"
+                        id="cungThan"
+                      >
+                        {renderCung(laSo.thapNhiCung[9])}
+                      </div>
+                      <div
+                        className="grid diaCung border-bottom"
+                        data-cung-id="10"
+                        id="cungDau"
+                      >
+                        {renderCung(laSo.thapNhiCung[10])}
+                      </div>
+                      <div
+                        className="grid diaCung border-bottom"
+                        data-cung-id="11"
+                        id="cungTuat"
+                      >
+                        {renderCung(laSo.thapNhiCung[11])}
+                      </div>
+                      <div
+                        className="grid diaCung border-left"
+                        data-cung-id="12"
+                        id="cungHoi"
+                      >
+                        {renderCung(laSo.thapNhiCung[12])}
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

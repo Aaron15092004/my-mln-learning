@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import logoDark2 from "../../assets/images/logo/logo-dark2.svg";
+
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState(null);
@@ -82,7 +84,7 @@ const Header = () => {
                                 />
                                 <img
                                   className="logo-dark is_svg"
-                                  src="https://lmsstyle.com/theme/new-learning/pluginfile.php/1/local_mb2builder/pageimages/36/logo-dark.svg"
+                                  src={logoDark2}
                                   alt="New Learning | Premium Moodle Theme"
                                 />
                               </a>

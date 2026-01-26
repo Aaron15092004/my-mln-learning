@@ -157,7 +157,7 @@ export const saoHyThan = new Sao(34, "Hỷ thần", "H", 5);
 export const saoBenhPhu = new Sao(35, "Bệnh phù", "O", 12);
 export const saoDaiHao = new Sao(36, "Đại hao", "H", 12);
 export const saoPhucBinh = new Sao(37, "Phục binh", "H", 13);
-export const saoQuanPhu2 = new Sao(38, "Quan phù", "H", 12);
+export const saoQuanPhu2 = new Sao(38, "Quan phủ", "H", 12);
 
 // ============= VÒNG TRÀNG SINH =============
 
@@ -293,6 +293,21 @@ export function dacTinhSao(viTriDiaBan, sao) {
       "H",
     ],
     6: ["Thiên cơ", "Đ", "Đ", "H", "M", "M", "V", "Đ", "Đ", "V", "M", "M", "H"],
+    7: [
+      "Thiên Phủ",
+      "M",
+      "B",
+      "M",
+      "B",
+      "V",
+      "Đ",
+      "M",
+      "Đ",
+      "M",
+      "B",
+      "V",
+      "Đ",
+    ],
     8: ["Thái âm", "V", "Đ", "H", "H", "H", "H", "H", "Đ", "V", "M", "M", "M"],
     9: [
       "Tham lang",

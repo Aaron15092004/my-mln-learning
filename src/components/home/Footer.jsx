@@ -50,7 +50,7 @@ const Footer = () => {
                           className="heading heading-none upper0 fwglobal lhglobal pbtsize-1"
                         >
                           <span className="headingtext fwglobal nline0">
-                            New Learning - programming and coding courses
+                            TAHA - Triết học và Đời sống
                           </span>
                         </h4>
 
@@ -66,10 +66,10 @@ const Footer = () => {
                           }}
                         >
                           {[
-                            "Nulla porttitor accumsan",
-                            "Proin eget tortor risus",
-                            "Sed porttitor lectus nibh",
-                            "Donec sollicitudin molestie",
+                            "Tài liệu học tập đầy đủ",
+                            "Đề thi và bài tập thực hành",
+                            "Thẻ ghi nhớ khái niệm",
+                            "Sơ đồ tư duy chi tiết",
                           ].map((item, idx) => (
                             <li key={idx}>
                               <a className="llink" href="#">
@@ -101,10 +101,10 @@ const Footer = () => {
                           }}
                         >
                           {[
-                            "Pellentesque laoreet",
-                            "Felis eros vehicula",
-                            "Leo at males",
-                            "Velit leo quis pede",
+                            "Cập nhật liên tục",
+                            "Phân tích chuyên sâu",
+                            "Trò chơi thú vị",
+                            "Tử vi vận hạn",
                           ].map((item, idx) => (
                             <li key={idx}>
                               <a className="llink" href="#">
@@ -113,23 +113,6 @@ const Footer = () => {
                             </li>
                           ))}
                         </ul>
-
-                        <div
-                          className="mb2-image align-none center0"
-                          style={{
-                            marginTop: "60px",
-                            marginBottom: "30px",
-                            width: "273px",
-                            maxWidth: "100%",
-                          }}
-                        >
-                          <img
-                            className="lazy"
-                            src="https://lmsstyle.com/theme/new-learning/theme/image.php/mb2nl/theme/1768588523/lazy_placeholder"
-                            data-src="https://lmsstyle.com/theme/new-learning/pluginfile.php/1/local_mb2builder/images/payment_methods.png"
-                            alt=""
-                          />
-                        </div>
                       </div>
                     </div>
                   </div>
@@ -158,7 +141,8 @@ const Footer = () => {
                           className="heading heading-none upper0 fwglobal lhglobal pbtsize-1"
                         >
                           <span className="headingtext fwglobal nline0">
-                            Got a question? Get in touch.
+                            Hãy đặt câu hỏi cho đội ngũ TAHA - Nhóm 6 - KS1872
+                            nhé!
                           </span>
                         </h4>
 
@@ -183,7 +167,7 @@ const Footer = () => {
                                   <i className="bi bi-envelope-at"></i>
                                 </span>
                                 <span className="list-text">
-                                  support@example.com
+                                  hantt21112004@gmail.com
                                 </span>
                               </div>
                             </li>
@@ -195,7 +179,9 @@ const Footer = () => {
                                 >
                                   <i className="bi bi-telephone"></i>
                                 </span>
-                                <span className="list-text">+12 345 67 89</span>
+                                <span className="list-text">
+                                  +84 862 990 923
+                                </span>
                               </div>
                             </li>
                           </ul>
@@ -218,7 +204,7 @@ const Footer = () => {
                           className="heading heading-none upper0 fwglobal lhglobal pbtsize-1"
                         >
                           <span className="headingtext fwglobal nline0">
-                            Join New Learning
+                            Tham gia cùng TAHA nhé!
                           </span>
                         </h4>
 
@@ -322,11 +308,10 @@ const Footer = () => {
                             fontSize: "1rem",
                           }}
                         >
-                          <span className="before">© 2017 - </span>
-                          2026
+                          <span className="before">© 2026</span>
                           <span className="after">
                             {" "}
-                            New Learning Theme. All rights reserved.
+                            TAHA - Triết học và đời sống. All rights reserved.
                           </span>
                         </div>
                       </div>
