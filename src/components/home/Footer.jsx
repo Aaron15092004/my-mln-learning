@@ -224,38 +224,18 @@ const Footer = () => {
                           <ul className="social-list">
                             {[
                               {
-                                name: "TikTok",
-                                icon: "fa-tiktok",
-                                class: "fa fa-brands fa-tiktok",
-                              },
-                              {
                                 name: "Facebook",
-                                icon: "fa-facebook",
-                                class: "fa fa-brands fa-facebook",
-                              },
-                              {
-                                name: "X",
-                                icon: "ri-twitter-x-fill",
-                                class: "ri-twitter-x-fill",
-                              },
-                              {
-                                name: "WhatsApp",
-                                icon: "fa-whatsapp",
-                                class: "fa fa-brands fa-whatsapp",
-                              },
-                              {
-                                name: "Linkedin",
-                                icon: "fa-linkedin",
-                                class: "fa fa-brands fa-linkedin",
+                                icon: "facebook",
+                                class: "bi bi-facebook",
+                                link: "https://www.facebook.com/nguyen.thi.thu.ha.315521",
                               },
                             ].map((social, idx) => (
-                              <li
-                                key={idx}
-                                className={`li-${social.icon.replace("fa-", "")}`}
-                              >
+                              <li key={idx} className={`li-${social.icon}`}>
                                 <a
                                   className="social-link"
-                                  href="#"
+                                  href={social.link}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
                                   data-toggle="tooltip"
                                   data-bs-toggle="tooltip"
                                   data-placement="top"
@@ -310,7 +290,6 @@ const Footer = () => {
                         >
                           <span className="before">© 2026</span>
                           <span className="after">
-                            {" "}
                             TAHA - Triết học và đời sống. All rights reserved.
                           </span>
                         </div>

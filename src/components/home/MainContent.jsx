@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import demoCert from "../../assets/images/demo_certificates.png";
+import makdahome from "../../assets/images/makdahome.png";
 import { Link } from "react-router-dom";
 
 const MainContent = () => {
@@ -300,8 +301,8 @@ const MainContent = () => {
                                             </div>
                                           </div>
                                           <div className="select-button">
-                                            <a
-                                              href="#"
+                                            <Link
+                                              to="/courses"
                                               className="mb2-pb-btn lhsmall rounded-1 btnborder1 fwglobal typeprimary"
                                               style={{
                                                 "--mb2-pb-btn-color":
@@ -314,8 +315,8 @@ const MainContent = () => {
                                                   "rgb(255, 178, 0)",
                                               }}
                                             >
-                                              Explore courses
-                                            </a>
+                                              Xem Kiến thức
+                                            </Link>
                                           </div>
                                         </div>
                                       </div>
@@ -394,15 +395,15 @@ const MainContent = () => {
                                 <div
                                   className="hero-img-wrap3"
                                   style={{
-                                    width: "1063px",
-                                    left: "38%",
+                                    width: "663px",
+                                    left: "48%",
                                     "--mb2-pb-herovm": "-4px",
                                   }}
                                 >
                                   <img
                                     className="hero-img lazy"
                                     src="https://lmsstyle.com/theme/new-learning/theme/image.php/mb2nl/theme/1768588523/lazy_placeholder_big"
-                                    data-src="https://lmsstyle.com/theme/new-learning/pluginfile.php/1/local_mb2builder/images/demo-programming-hero1.png"
+                                    data-src={makdahome}
                                     alt=""
                                   />
                                 </div>
@@ -963,9 +964,9 @@ const MainContent = () => {
                                                 marginTop: "2.1rem",
                                               }}
                                             >
-                                              <a
+                                              <Link
                                                 className="mb2-pb-btn sizexlg rounded-1 btnborder0"
-                                                href="#"
+                                                to="/courses"
                                                 style={{
                                                   "--mb2-pb-btn-bgcolor":
                                                     "rgb(                                                        54,                                                        38,                                                        178                                                      )",
@@ -974,7 +975,7 @@ const MainContent = () => {
                                                 }}
                                               >
                                                 Vào xem thử
-                                              </a>
+                                              </Link>
                                             </div>
                                           </div>
                                           <div

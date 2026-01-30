@@ -316,7 +316,7 @@ export default function FlipCardPage() {
           </div>
           <div className="game-header">
             <div className="game-name">
-              <img src={titleImage} />
+              <h1 data-text="MEMORY GAME">MEMORY GAME</h1>
             </div>
           </div>
           <div className="game-box-outer">

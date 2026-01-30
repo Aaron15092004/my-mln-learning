@@ -6,6 +6,7 @@ import QuizPage from "./pages/QuizPage";
 import QuizResultsPage from "./pages/QuizResultsPage";
 import FlipCardPage from "./pages/FlipCardPage";
 import TuviPage from "./pages/Tuvipage";
+import Courses from "./pages/Courses";
 
 function App() {
   return (
@@ -14,8 +15,6 @@ function App() {
         {/* ========== HOME ROUTES ========== */}
         <Route element={<HomeLayout />}>
           <Route path="/" element={<HomePage />} />
-          {/* <Route path="/about" element={<AboutPage />} /> */}
-          {/* <Route path="/contact" element={<ContactPage />} /> */}
         </Route>
 
         {/* ========== QUIZ ROUTES ========== */}
@@ -28,6 +27,8 @@ function App() {
         <Route path="/flip" element={<FlipCardPage />} />
 
         <Route path="/tuvi" element={<TuviPage />} />
+
+        <Route path="/courses" element={<Courses />} />
 
         {/* <Route path="*" element={<NotFoundPage />} /> */}
       </Routes>

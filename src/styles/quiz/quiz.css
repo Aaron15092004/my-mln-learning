@@ -38,7 +38,7 @@ Author      : jthemes (https://themeforest.net/user/jthemes)
 
 .count_number span {
   font-size: 3.125rem;
-  background: -webkit-linear-gradient(#6a14d1, #c82090);
+  background: -webkit-linear-gradient(#3626b2, #00b4d8);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: 600;
@@ -53,10 +53,10 @@ Author      : jthemes (https://themeforest.net/user/jthemes)
     linear,
     left top,
     right top,
-    from(#6a14d1),
-    to(#c82090)
+    from(#3626b2),
+    to(#00b4d8)
   );
-  background: linear-gradient(to right, #6a14d1, #c82090);
+  background: linear-gradient(to right, #3626b2, #00b4d8);
 }
 
 .multisteps_form_panel {
@@ -85,10 +85,10 @@ label.active {
     linear,
     left top,
     right top,
-    from(#6a14d1),
-    to(#c82090)
+    from(#3626b2),
+    to(#00b4d8)
   );
-  background: linear-gradient(to right, #6a14d1, #c82090);
+  background: linear-gradient(to right, #3626b2, #00b4d8);
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
   border: none;
@@ -105,10 +105,10 @@ label.active {
     linear,
     left top,
     right top,
-    from(#6a14d1),
-    to(#c82090)
+    from(#3626b2),
+    to(#00b4d8)
   );
-  background: linear-gradient(to right, #6a14d1, #c82090);
+  background: linear-gradient(to right, #3626b2, #00b4d8);
   border: 3px solid #e1e1e1;
 }
 
@@ -126,10 +126,10 @@ label.active {
     linear,
     left top,
     right top,
-    from(#6a14d1),
-    to(#c82090)
+    from(#3626b2),
+    to(#00b4d8)
   );
-  background: linear-gradient(to right, #6a14d1, #c82090);
+  background: linear-gradient(to right, #3626b2, #00b4d8);
 }
 .step p {
   color: #cfcfcf;
@@ -137,7 +137,7 @@ label.active {
   font-weight: 500;
 }
 .step p.active {
-  background: -webkit-linear-gradient(#6a14d1, #c82090);
+  background: -webkit-linear-gradient(#3626b2, #00b4d8);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -146,13 +146,13 @@ label.active {
     linear,
     left top,
     right top,
-    from(#6a14d1),
-    to(#c82090)
+    from(#3626b2),
+    to(#00b4d8)
   );
-  background: linear-gradient(to right, #6a14d1, #c82090);
+  background: linear-gradient(to right, #3626b2, #00b4d8);
 }
 .step.finish p {
-  background: -webkit-linear-gradient(#6a14d1, #c82090);
+  background: -webkit-linear-gradient(#3626b2, #00b4d8);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -168,16 +168,10 @@ label.active {
   font-weight: 600;
   background-color: #000000;
 }
-.prev_btn .fas {
-  width: 2.5rem;
-  height: 2.5rem;
+.prev_btn .bi {
   line-height: 2.5rem;
-  color: #000000;
-  background-color: #ffffff;
 }
-.prev_btn .fas:hover {
-  color: #ffffff;
-  background-color: #000000;
+.prev_btn .bi:hover {
   -webkit-transition: 0.3s cubic-bezier(0.25, 1, 0.5, 1);
   transition: 0.3s cubic-bezier(0.25, 1, 0.5, 1);
 }
@@ -196,21 +190,16 @@ label.active {
     linear,
     left top,
     right top,
-    from(#c82090),
-    to(#6a14d1)
+    from(#00b4d8),
+    to(#3626b2)
   );
-  background: linear-gradient(to right, #c82090, #6a14d1);
+  background: linear-gradient(to right, #00b4d8, #3626b2);
 }
 
-.next_btn .fas {
-  width: 2.5rem;
-  height: 2.5rem;
+.next_btn .bi {
   line-height: 2.5rem;
-  background-color: #000000;
 }
-.next_btn .fas:hover {
-  color: #000000;
-  background-color: #ffffff;
+.next_btn .bi:hover {
   -webkit-transition: 0.3s cubic-bezier(0.25, 1, 0.5, 1);
   transition: 0.3s cubic-bezier(0.25, 1, 0.5, 1);
 }
@@ -220,10 +209,10 @@ label.active {
     linear,
     left top,
     right top,
-    from(#c82090),
-    to(#6a14d1)
+    from(#00b4d8),
+    to(#3626b2)
   );
-  background: linear-gradient(to right, #c82090, #6a14d1);
+  background: linear-gradient(to right, #00b4d8, #3626b2);
   -webkit-transition: 0.3s cubic-bezier(0.25, 1, 0.5, 1);
   transition: 0.3s cubic-bezier(0.25, 1, 0.5, 1);
 }
@@ -455,5 +444,153 @@ button {
   .form_btn {
     bottom: 2%;
     left: 27%;
+  }
+}
+
+.quiz-config-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(13, 20, 36, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-content-custom {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border-radius: 2rem;
+  padding: 3rem;
+  max-width: 600px;
+  width: 90%;
+  box-shadow: 0 20px 60px rgba(106, 20, 209, 0.3);
+  animation: slideUp 0.4s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal-title-custom {
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: linear-gradient(to right, #3626b2, #00b4d8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.config-label {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #0d1424;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.config-select {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  font-size: 1.1rem;
+  border: 3px solid #e1e1e1;
+  border-radius: 50px;
+  background-color: #ffffff;
+  color: #0d1424;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  margin-bottom: 1.5rem;
+}
+
+.config-select:focus {
+  outline: none;
+  border-color: #3626b2;
+  box-shadow: 0 0 0 0.2rem rgba(106, 20, 209, 0.15);
+}
+
+.config-select:hover {
+  border-color: #00b4d8;
+}
+
+.start-quiz-btn {
+  width: 100%;
+  padding: 1.2rem 2rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #ffffff;
+  background: linear-gradient(to right, #00b4d8, #3626b2);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  margin-top: 1rem;
+  box-shadow: 0 10px 30px rgba(200, 32, 144, 0.3);
+}
+
+.start-quiz-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(200, 32, 144, 0.4);
+}
+
+.start-quiz-btn:active {
+  transform: translateY(-1px);
+}
+
+.start-quiz-btn i {
+  margin-right: 0.5rem;
+}
+
+@media screen and (max-width: 767.98px) {
+  .modal-content-custom {
+    padding: 2rem 1.5rem;
+    width: 95%;
+  }
+
+  .modal-title-custom {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .config-select {
+    padding: 0.9rem 1.2rem;
+    font-size: 1rem;
+  }
+
+  .start-quiz-btn {
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
+  }
+}
+
+@media screen and (max-width: 575.98px) {
+  .modal-title-custom {
+    font-size: 1.5rem;
+  }
+
+  .config-label {
+    font-size: 1rem;
   }
 }
