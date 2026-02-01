@@ -463,7 +463,7 @@ export function lapDiaBan(
 
   // ========== THIÊN GIẢI - ĐỊA GIẢI ==========
 
-  const viTriThienGiai = dichCung(9, 2 * thangAm - 2);
+  const viTriThienGiai = dichCung(9, thangAm - 1);
   diaBan.nhapSao(viTriThienGiai, saoThienGiai);
 
   const viTriDiaGiai = dichCung(viTriTaPhu, 3);

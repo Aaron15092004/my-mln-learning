@@ -4,7 +4,7 @@ export const coursesData = [
     tieu_de: "Khái lược về triết học và vai trò của nó trong đời sống xã hội",
     cau_noi_hay:
       "Triết học không dạy ta điều gì, nhưng dạy ta cách suy nghĩ về mọi điều.",
-    mindmap_url: "",
+    mindmap_url: "chu-de-1.jpg",
     cac_van_de: [
       {
         stt: 1,
@@ -49,7 +49,7 @@ export const coursesData = [
     tieu_de: "Vật chất - Vận động - Không gian - Thời gian",
     cau_noi_hay:
       "Vật chất không bị tiêu diệt cũng không được tạo ra, nó chỉ chuyển hóa từ dạng này sang dạng khác.",
-    mindmap_url: "",
+    mindmap_url: "chu-de-1.jpg",
     cac_van_de: [
       {
         stt: 1,
@@ -88,7 +88,7 @@ export const coursesData = [
     tieu_de: "Ý thức - Nguồn gốc và bản chất",
     cau_noi_hay:
       "Ý thức là sản phẩm cao nhất của vật chất, nhưng cũng là công cụ mạnh mẽ nhất để cải tạo thế giới.",
-    mindmap_url: "",
+    mindmap_url: "chu-de-2.jpg",
     cac_van_de: [
       {
         stt: 1,
@@ -115,7 +115,7 @@ export const coursesData = [
     tieu_de: "Nguyên lý mối liên hệ phổ biến và phát triển",
     cau_noi_hay:
       "Mọi thứ đều có liên hệ với nhau, và mọi thứ đều thay đổi - đó là quy luật vĩnh cửu của vũ trụ.",
-    mindmap_url: "",
+    mindmap_url: "chu-de-2.jpg",
     cac_van_de: [
       {
         stt: 1,
@@ -142,7 +142,7 @@ export const coursesData = [
     tieu_de: "Các cặp phạm trù biện chứng",
     cau_noi_hay:
       "Muốn hiểu bản chất, hãy nhìn vào hiện tượng. Muốn thay đổi kết quả, hãy tác động vào nguyên nhân.",
-    mindmap_url: "",
+    mindmap_url: "chu-de-2.jpg",
     cac_van_de: [
       {
         stt: 1,
@@ -169,7 +169,7 @@ export const coursesData = [
     tieu_de: "Quy luật lượng - chất",
     cau_noi_hay:
       "Giọt nước làm tràn ly - sự tích lũy về lượng tất yếu dẫn đến bước nhảy về chất.",
-    mindmap_url: "",
+    mindmap_url: "chu-de-3.jpg",
     cac_van_de: [
       {
         stt: 1,
@@ -202,7 +202,7 @@ export const coursesData = [
     tieu_de: "Quy luật mâu thuẫn",
     cau_noi_hay:
       "Trong mâu thuẫn có sự phát triển, trong đấu tranh có sự tiến bộ - đó là động lực của mọi vận động.",
-    mindmap_url: "",
+    mindmap_url: "chu-de-3.jpg",
     cac_van_de: [
       {
         stt: 1,
@@ -247,7 +247,7 @@ export const coursesData = [
     tieu_de: "Quy luật phủ định của phủ định",
     cau_noi_hay:
       "Phát triển không phải đường thẳng mà là đường xoáy ốc - vừa tiến lên vừa kế thừa cái cũ.",
-    mindmap_url: "",
+    mindmap_url: "chu-de-3.jpg",
     cac_van_de: [
       {
         stt: 1,
@@ -274,7 +274,7 @@ export const coursesData = [
     tieu_de: "Thực tiễn và Nhận thức - Chân lý",
     cau_noi_hay:
       "Thực tiễn là nguồn gốc, động lực, mục đích và tiêu chuẩn của mọi nhận thức.",
-    mindmap_url: "",
+    mindmap_url: "chu-de-3.jpg",
     cac_van_de: [
       {
         stt: 1,
@@ -307,7 +307,7 @@ export const coursesData = [
     tieu_de: "Lực lượng sản xuất và Quan hệ sản xuất",
     cau_noi_hay:
       "Sản xuất vật chất là nền tảng của mọi xã hội, lực lượng sản xuất là động lực của lịch sử.",
-    mindmap_url: "",
+    mindmap_url: "chu-de-3.jpg",
     cac_van_de: [
       {
         stt: 1,
@@ -346,7 +346,7 @@ export const coursesData = [
     tieu_de: "Cơ sở hạ tầng và Kiến trúc thượng tầng",
     cau_noi_hay:
       "Kinh tế là nền móng, chính trị - văn hóa là kiến trúc - cả hai cùng tạo nên xã hội.",
-    mindmap_url: "",
+    mindmap_url: "chu-de-3.jpg",
     cac_van_de: [
       {
         stt: 1,
@@ -379,7 +379,7 @@ export const coursesData = [
     tieu_de: "Tồn tại xã hội và Ý thức xã hội",
     cau_noi_hay:
       "Không phải ý thức quyết định cuộc sống, mà cuộc sống quyết định ý thức.",
-    mindmap_url: "",
+    mindmap_url: "chu-de-3.jpg",
     cac_van_de: [
       {
         stt: 1,

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { lapDiaBan } from "../utils/lapDiaBan";
 import {
@@ -12,6 +12,7 @@ import {
   nguHanh,
 } from "../utils/tuviCalculations";
 import "../styles/tuvi/TuviPage.css";
+import { createGeminiService } from "../services/geminiService";
 
 const TuviPage = () => {
   const [formData, setFormData] = useState({
@@ -26,8 +27,30 @@ const TuviPage = () => {
   });
 
   const [laSo, setLaSo] = useState(null);
+  const [luanGiai, setLuanGiai] = useState(null);
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [error, setError] = useState(null);
+
   const vantaRef = useRef(null);
   const vantaEffect = useRef(null);
+
+  const geminiServiceRef = useRef(null);
+
+  //const GEMINI_API_KEY = "AIzaSyDWZrlRMKdtz3k5x9ZpPRdKFeSu_zVpx34";
+  const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
+
+  useEffect(() => {
+    // Khởi tạo service
+    console.log(
+      "Creating Gemini Service with key:",
+      GEMINI_API_KEY.substring(0, 10) + "...",
+    );
+    geminiServiceRef.current = createGeminiService(GEMINI_API_KEY);
+
+    // Kiểm tra status
+    const status = geminiServiceRef.current.getApiKeyStatus();
+    console.log("API Key Status:", status);
+  }, []);
 
   // Khởi tạo Vanta.js effect
   useEffect(() => {
@@ -82,8 +105,6 @@ const TuviPage = () => {
         parseInt(formData.muigio),
       );
 
-      console.log(diaBan);
-
       let ngayAm = parseInt(formData.ngaysinh);
       let thangAm = parseInt(formData.thangsinh);
       let namAm = parseInt(formData.namsinh);
@@ -131,8 +152,8 @@ const TuviPage = () => {
       const hanhCuc = timCuc(diaBan.cungMenh, canNam);
       const cuc = nguHanh(hanhCuc);
 
-      const menhChu = diaChi[diaBan.cungMenh]?.menhChu || "";
-      const thanChu = diaChi[diaBan.cungThan]?.thanChu || "";
+      const menhChu = diaChi[chiNam]?.menhChu || "";
+      const thanChu = diaChi[chiNam]?.thanChu || "";
 
       const thienBanData = {
         ten: formData.hoten,
@@ -165,9 +186,103 @@ const TuviPage = () => {
         thapNhiCung: diaBan.thapNhiCung,
         thienBan: thienBanData,
       });
+
+      setLuanGiai(null); // Clear luận giải cũ
+      setError(null); // Clear lỗi cũ
     } catch (error) {
       console.error("Lỗi khi lập lá số:", error);
       alert("Có lỗi xảy ra khi lập lá số. Vui lòng kiểm tra lại thông tin!");
+    }
+  };
+
+  const createPrompt = () => {
+    const tb = laSo.thienBan;
+    const cungData = Object.values(laSo.thapNhiCung)
+      .filter((c) => c && c.cungSo !== 0)
+      .map((cung) => {
+        const chinhTinh = cung.cungSao
+          .filter((s) => s.saoLoai === 1)
+          .map((s) => `${s.saoTen}${s.saoDacTinh ? ` (${s.saoDacTinh})` : ""}`)
+          .join(", ");
+
+        return `- ${cung.cungTen} (${cung.cungChu}): ${chinhTinh || "Không có sao chính"}`;
+      })
+      .join("\n");
+
+    return `Bạn là chuyên gia tử vi Tử Vi Đẩu Số người Việt Nam với kiến thức sâu rộng. Hãy luận giải chi tiết lá số sau:
+
+**THÔNG TIN BÁT TỰ:**
+- Họ tên: ${tb.ten}
+- Giới tính: ${tb.namNu}
+- Năm sinh: ${tb.canNamTen} ${tb.chiNamTen} (${tb.amDuongNamSinh})
+- Tháng sinh: ${tb.canThang} ${tb.chiThang}${tb.thangNhuan === 1 ? " (nhuận)" : ""}
+- Ngày sinh: ${tb.canNgay} ${tb.chiNgay}
+- Giờ sinh: ${tb.gioSinh}
+- Bản mệnh: ${tb.banMenh}
+- Cục: ${tb.tenCuc}
+- Mệnh chủ: ${tb.menhChu}
+- Thân chủ: ${tb.thanChu}
+
+**12 CUNG VÀ SAO:**
+${cungData}
+
+Hãy luận giải theo cấu trúc sau (viết bằng tiếng Việt, văn phong dễ hiểu, tích cực):
+
+## 1. TỔNG QUAN VỀ SỐ MỆNH
+Phân tích tổng thể về cục, bản mệnh, mệnh chủ, thân chủ và ý nghĩa của chúng.
+
+## 2. TÍNH CÁCH VÀ VẬN MỆNH
+Dựa vào cung Mệnh và các sao chính để phân tích tính cách, điểm mạnh, điểm yếu.
+
+## 3. SỰ NGHIỆP VÀ TÀI LỘC
+Phân tích cung Quan Lộc, Tài Bạch, và khả năng phát triển sự nghiệp.
+
+## 4. TÌNH DUYÊN VÀ GIA ĐẠO
+Phân tích cung Phu Thê, Tử Tức về tình cảm, hôn nhân, con cái.
+
+## 5. SỨC KHỎE
+Phân tích cung Tật Ách về sức khỏe cần lưu ý.
+
+## 6. LỜI KHUYÊN VÀ HƯỚNG ĐI
+Đưa ra lời khuyên thiết thực để phát huy thế mạnh và hạn chế điểm yếu.
+
+Lưu ý: 
+- Viết văn phong tích cực, khuyến khích
+- Độ dài khoảng 1000-1200 từ
+- Sử dụng ngôn ngữ dễ hiểu, tránh quá huyền bí
+- Format rõ ràng với heading và paragraph`;
+  };
+
+  const generateLuanGiai = async () => {
+    if (!laSo) {
+      console.log("❌ Lá số chưa được lập");
+      return;
+    }
+
+    if (!geminiServiceRef.current) {
+      console.error("❌ Gemini service chưa được khởi tạo");
+      setError("Service chưa sẵn sàng. Vui lòng refresh trang.");
+      return;
+    }
+
+    setIsAnalyzing(true);
+    setError(null);
+
+    try {
+      const prompt = createPrompt();
+
+      console.log("Đang gửi request tới Gemini API...");
+      console.log("Service ref:", geminiServiceRef.current);
+
+      const response = await geminiServiceRef.current.generateResponse(prompt);
+
+      console.log("✅ Nhận được phản hồi từ AI");
+      setLuanGiai(response);
+    } catch (err) {
+      console.error("❌ Lỗi:", err);
+      setError(err.message);
+    } finally {
+      setIsAnalyzing(false);
     }
   };
 
@@ -521,14 +636,14 @@ const TuviPage = () => {
         <div className="container my-5">
           <div className="card shadow-lg rounded-4">
             <div
-              className="card-body p-5"
+              className="card-body p-5 rounded-4"
               style={{
                 boxShadow: `
-    0 0 10px rgba(255,255,255,.6),
-    0 0 25px rgba(120,150,255,.8),
-    0 0 50px rgba(120,150,255,1),
-    0 0 80px rgba(120,150,255,1)
-  `,
+                  0 0 10px rgba(255,255,255,.6),
+                  0 0 25px rgba(120,150,255,.8),
+                  0 0 50px rgba(120,150,255,1),
+                  0 0 80px rgba(120,150,255,1)
+                `,
               }}
             >
               <div
@@ -649,6 +764,208 @@ const TuviPage = () => {
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+          {/* PHẦN MỚI: Luận giải tự động */}
+          <div className="shadow-lg rounded-4 mt-4">
+            <div
+              className="text-white p-4"
+              style={{
+                background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                border: "none",
+                borderRadius: "25px",
+                padding: "12px 40px",
+                fontSize: "1.1rem",
+                fontWeight: "600",
+                boxShadow: `
+            0 0 10px rgba(255, 255, 255, 0.6),
+            0 0 25px rgba(120, 150, 255, 0.8),
+            0 0 50px rgb(120, 150, 255),
+            0 0 80px rgb(120, 150, 255)
+          `,
+                color: "#fff",
+                textShadow: "0 0 10px rgba(255, 255, 255, 0.8)",
+                marginTop: "60px",
+              }}
+            >
+              <h3 className="mb-0">
+                <i class="bi bi-arrow-through-heart-fill"></i> Luận giải tự động
+                bởi Chuyên gia
+              </h3>
+            </div>
+            <div
+              className="p-4"
+              style={{
+                background: "transparent",
+              }}
+            >
+              {!luanGiai && !isAnalyzing && (
+                <div className="text-center py-4">
+                  <p
+                    className="mb-3"
+                    style={{
+                      color: "#fff",
+                      textShadow: `
+          0 0 10px rgba(255, 255, 255, 0.6),
+          0 0 25px rgba(120, 150, 255, 0.8),
+          0 0 50px rgb(120, 150, 255),
+          0 0 80px rgb(120, 150, 255)
+        `,
+                    }}
+                  >
+                    Nhấn nút bên dưới để các Chuyên gia phía chúng tôi phân tích
+                    và luận giải lá số của bạn
+                  </p>
+                  <button
+                    className="btn btn-lg btn-primary px-5"
+                    onClick={generateLuanGiai}
+                    style={{
+                      background:
+                        "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                      border: "none",
+                      borderRadius: "25px",
+                      padding: "12px 40px",
+                      fontSize: "1.1rem",
+                      fontWeight: "600",
+                      boxShadow: `
+            0 0 10px rgba(255, 255, 255, 0.6),
+            0 0 25px rgba(120, 150, 255, 0.8),
+            0 0 50px rgb(120, 150, 255),
+            0 0 80px rgb(120, 150, 255)
+          `,
+                      color: "#fff",
+                      textShadow: "0 0 10px rgba(255, 255, 255, 0.8)",
+                    }}
+                  >
+                    <i className="bi bi-asterisk me-2"></i> Tạo luận giải
+                  </button>
+                </div>
+              )}
+
+              {isAnalyzing && (
+                <div className="text-center py-5">
+                  <div
+                    className="spinner-border mb-3"
+                    role="status"
+                    style={{
+                      width: "3rem",
+                      height: "3rem",
+                      color: "#fff",
+                      filter: `drop-shadow(0 0 10px rgba(120, 150, 255, 0.8))`,
+                    }}
+                  >
+                    <span className="visually-hidden">Đang phân tích...</span>
+                  </div>
+                  <p
+                    style={{
+                      color: "#fff",
+                      textShadow: `
+          0 0 10px rgba(255, 255, 255, 0.6),
+          0 0 25px rgba(120, 150, 255, 0.8)
+        `,
+                    }}
+                  >
+                    <i className="bi bi-sparkles me-2"></i>
+                    AI đang phân tích lá số của bạn, vui lòng chờ...
+                  </p>
+                </div>
+              )}
+
+              {error && (
+                <div
+                  className="alert alert-danger"
+                  role="alert"
+                  style={{
+                    background: "rgba(220, 53, 69, 0.1)",
+                    border: "1px solid rgba(220, 53, 69, 0.5)",
+                    color: "#fff",
+                    textShadow: "0 0 5px rgba(220, 53, 69, 0.8)",
+                  }}
+                >
+                  <i className="bi bi-exclamation-triangle me-2"></i>
+                  {error}
+                </div>
+              )}
+
+              {luanGiai && (
+                <div
+                  className="luan-giai-content"
+                  style={{
+                    lineHeight: "1.8",
+                    fontSize: "1.05rem",
+                    color: "#fff",
+                  }}
+                >
+                  {luanGiai.split("\n").map((para, i) => {
+                    // Xử lý heading (## )
+                    if (para.startsWith("## ")) {
+                      return (
+                        <h4
+                          key={i}
+                          className="mt-4 mb-3"
+                          style={{
+                            borderBottom: "2px solid rgba(120, 150, 255, 0.6)",
+                            paddingBottom: "8px",
+                            fontWeight: "700",
+                            color: "#fff",
+                            textShadow: `
+                              0 0 10px rgba(255, 255, 255, 0.6),
+                              0 0 25px rgba(120, 150, 255, 0.8),
+                              0 0 50px rgb(120, 150, 255)
+                            `,
+                          }}
+                        >
+                          {para.replace("## ", "")}
+                        </h4>
+                      );
+                    }
+                    // Xử lý paragraph bình thường
+                    if (para.trim()) {
+                      return (
+                        <p
+                          key={i}
+                          className="mb-3"
+                          style={{
+                            textAlign: "justify",
+                            color: "rgba(255, 255, 255, 0.9)",
+                            textShadow: `
+                              0 0 10px rgba(255, 255, 255, 0.6),
+                              0 0 25px rgba(120, 150, 255, 0.8),
+                              0 0 50px rgb(120, 150, 255)
+                            `,
+                          }}
+                        >
+                          {para}
+                        </p>
+                      );
+                    }
+                    return null;
+                  })}
+
+                  <div
+                    className="mt-4 p-3 rounded"
+                    style={{
+                      background: "rgba(120, 150, 255, 0.1)",
+                      border: "1px solid rgba(120, 150, 255, 0.3)",
+                      boxShadow: "0 0 20px rgba(120, 150, 255, 0.2)",
+                    }}
+                  >
+                    <p
+                      className="mb-0 small"
+                      style={{
+                        color: "rgba(255, 255, 255, 0.8)",
+                        textShadow: "0 0 5px rgba(255, 255, 255, 0.3)",
+                      }}
+                    >
+                      <i className="bi bi-music-note me-2"></i>
+                      <strong>Lưu ý:</strong> Luận giải này được tạo tự động bởi
+                      AI dựa trên lá số tử vi. Kết quả chỉ mang tính tham khảo,
+                      không thay thế cho tư vấn chuyên sâu từ thầy số có kinh
+                      nghiệm.
+                    </p>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>

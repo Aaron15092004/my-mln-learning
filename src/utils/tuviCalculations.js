@@ -1,8 +1,3 @@
-// tuviCalculations.js - Chuyển đổi từ Python lasotuvi
-// (c) 2016 doanguyen - Converted to JavaScript
-
-// ============= CONSTANTS =============
-
 export const thienCan = [
   {
     id: 0,
@@ -112,7 +107,7 @@ export const diaChi = [
     tenChi: "Tý",
     tenHanh: "T",
     menhChu: "Tham lang",
-    thanChu: "Linh tinh",
+    thanChu: "Hỏa tinh",
     amDuong: 1,
   },
   {
@@ -160,7 +155,7 @@ export const diaChi = [
     tenChi: "Ngọ",
     tenHanh: "H",
     menhChu: "Phá quân",
-    thanChu: "Hỏa tinh",
+    thanChu: "Linh tinh",
     amDuong: 1,
   },
   {
@@ -199,7 +194,7 @@ export const diaChi = [
     id: 12,
     tenChi: "Hợi",
     tenHanh: "T",
-    menhChu: "Cú môn",
+    menhChu: "Cự môn",
     thanChu: "Thiên cơ",
     amDuong: -1,
   },
@@ -807,8 +802,8 @@ export function timThienMa(chiNam) {
 
 export function timPhaToai(chiNam) {
   const demNghich = chiNam % 3;
-  if (demNghich === 0) return 6;
-  if (demNghich === 1) return 10;
+  if (demNghich === 0) return 10;
+  if (demNghich === 1) return 6;
   if (demNghich === 2) return 2;
 
   throw new Error("Không tìm được Phá toái");

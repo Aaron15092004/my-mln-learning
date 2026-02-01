@@ -1,15 +1,18 @@
 import { useState, useEffect, useRef } from "react";
 import demoCert from "../../assets/images/demo_certificates.png";
 import makdahome from "../../assets/images/makdahome.png";
+import thuHa from "../../assets/images/thu-ha.png";
 import { Link } from "react-router-dom";
 
 const MainContent = () => {
-  const [selectedLanguage, setSelectedLanguage] = useState("JavaScript");
+  const [selectedLanguage, setSelectedLanguage] = useState(
+    "Hãy học cùng chúng tôi",
+  );
   const [isSelectOpen, setIsSelectOpen] = useState(false);
 
   const vantaRef = useRef(null);
   const vantaEffect = useRef(null);
-  const languages = ["JavaScript"];
+  const languages = ["Hãy học cùng chúng tôi"];
 
   useEffect(() => {
     const initVanta = () => {
@@ -250,7 +253,9 @@ const MainContent = () => {
                                       >
                                         <div className="select-label">
                                           <span className="labeltext">
-                                            Website được code bằng ngôn ngữ
+                                            “Học triết không làm bạn giàu –
+                                            nhưng làm bạn đặt câu hỏi vì sao
+                                            mình nghèo.”
                                           </span>
                                         </div>
                                         <div className="select-container">
@@ -459,10 +464,9 @@ const MainContent = () => {
                                           className="headingtext fwglobal nline0"
                                           style={{ color: "#00B4D8" }}
                                         >
-                                          "Các nhà triết học đã chỉ giải thích
-                                          thế giới bằng nhiều cách khác nhau,
-                                          song vấn đề là cải tạo thế giới" -
-                                          Karl Marx
+                                          “Triết học dạy ta đặt câu hỏi cho mọi
+                                          thứ, kể cả lý do vì sao mình lại chọn
+                                          học triết.” - Karl Marx
                                         </span>
                                       </h4>
                                       <div
@@ -987,13 +991,13 @@ const MainContent = () => {
                                                 className="ba_img3 position-absolute"
                                                 style={{
                                                   "--mb2-pb-ba_imgmt": "0px",
-                                                  width: "464px",
+                                                  width: "560px",
                                                 }}
                                               >
                                                 <img
                                                   alt="Programming certifications to improve your job and career prospects"
                                                   className="ba_img_img lazy"
-                                                  data-src="https://lmsstyle.com/theme/new-learning/pluginfile.php/1/local_mb2builder/images/programming_banner_01.png"
+                                                  data-src={thuHa}
                                                   src="https://lmsstyle.com/theme/new-learning/theme/image.php/mb2nl/theme/1768588523/lazy_placeholder_big"
                                                 />
                                               </div>

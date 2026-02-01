@@ -683,17 +683,6 @@
   background: none;
 }
 
-.flip-game-container .arrow-icon {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 512'%3E%3Cpath fill='%23fff' d='M192 448c-8.188 0-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25l160-160c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l137.4 137.4c12.5 12.5 12.5 32.75 0 45.25C208.4 444.9 200.2 448 192 448z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  padding-left: 18px;
-  background-size: 18px auto;
-  background-position: left center;
-  text-transform: none;
-  font-size: 30px;
-  color: #ffffff;
-}
-
 .flip-game-container .mobile-logo {
   display: none;
 }
@@ -914,4 +903,64 @@
     -webkit-clip-path: ellipse(120px 120px at 102.62% -1.61%);
     clip-path: ellipse(120px 120px at 102.62% -1.61%);
   }
+}
+
+/* Back Home Button - giống trang Courses */
+.flip-game-container .back-home-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #00b4d8, #3626b2);
+  color: white;
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 180, 216, 0.3);
+  line-height: 1.2 !important;
+}
+
+.flip-game-container .back-home-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 180, 216, 0.4);
+  color: white;
+  background: linear-gradient(135deg, #00b4d8, #3626b2);
+}
+
+.flip-game-container .back-home-btn i {
+  font-size: 18px;
+}
+
+/* Responsive cho nút Back */
+@media (max-width: 768px) {
+  .flip-game-container .back-home-btn {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+
+  .flip-game-container .back-home-btn i {
+    font-size: 16px;
+  }
+
+  .flip-game-container .back-text {
+    display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .flip-game-container .back-home-btn {
+    padding: 8px 12px;
+  }
+
+  .flip-game-container .back-home-btn i {
+    font-size: 20px;
+  }
+}
+
+/* Xóa style cũ của arrow-icon */
+.flip-game-container .arrow-icon {
+  background-image: none;
+  padding-left: 0;
 }

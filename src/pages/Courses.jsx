@@ -2,14 +2,11 @@ import { useState } from "react";
 import { coursesData } from "../data/coursesData";
 import "../styles/courses/courses.css";
 import { Link } from "react-router-dom";
+import Zoom from "react-medium-image-zoom";
+import "react-medium-image-zoom/dist/styles.css";
 
 const Courses = () => {
-  const [selectedSlot, setSelectedSlot] = useState(null);
   const [selectedTopic, setSelectedTopic] = useState(null);
-
-  const handleSlotClick = (slotNum) => {
-    setSelectedSlot(slotNum);
-  };
 
   const handleTopicChange = (e) => {
     const topicId = e.target.value;
@@ -19,18 +16,6 @@ const Courses = () => {
     } else {
       setSelectedTopic(null);
     }
-  };
-
-  const renderSlots = () => {
-    return Array.from({ length: 6 }, (_, i) => i + 1).map((slotNum) => (
-      <button
-        key={slotNum}
-        className={`btn btn-outline-light slot-btn ${selectedSlot === slotNum ? "active" : ""}`}
-        onClick={() => handleSlotClick(slotNum)}
-      >
-        Slot {slotNum}
-      </button>
-    ));
   };
 
   const renderContent = () => {
@@ -96,11 +81,14 @@ const Courses = () => {
 
     if (selectedTopic.mindmap_url && selectedTopic.mindmap_url.trim() !== "") {
       return (
-        <img
-          src={selectedTopic.mindmap_url}
-          className="img-fluid rounded"
-          alt="Sơ đồ tư duy"
-        />
+        <Zoom>
+          <img
+            src={selectedTopic.mindmap_url}
+            className="img-fluid rounded"
+            alt="Sơ đồ tư duy"
+            style={{ cursor: "zoom-in" }}
+          />
+        </Zoom>
       );
     }
 
@@ -120,9 +108,13 @@ const Courses = () => {
     <div className="triet-hoc-wrapper container-fluid p-4">
       {/* Header */}
       <div
-        className="rounded-4 shadow-lg p-4 mb-4 text-center"
+        className="position-relative rounded-4 shadow-lg p-4 mb-4 text-center"
         style={{ color: "#3626b2" }}
       >
+        <Link to="/" className="back-home-btn">
+          <i className="bi bi-house-door-fill"></i>
+          <span className="back-text">Trang chủ</span>
+        </Link>
         <h1 className="mb-2 fw-bold" style={{ color: "#3626b2" }}>
           <i className="bi bi-book"></i> Học cùng chúng tớ
         </h1>
@@ -130,24 +122,6 @@ const Courses = () => {
           <i className="bi bi-lightbulb"></i> Chủ nghĩa duy vật biện chứng và
           chủ nghĩa duy vật lịch sử
         </p>
-        <div
-          className="position-absolute"
-          style={{ top: "30px", left: "80px", fontSize: "24px" }}
-        >
-          <Link to="/">
-            <i class="bi bi-house-door me-2"></i>BACK
-          </Link>
-        </div>
-      </div>
-
-      {/* Slot Selector */}
-      <div className="rounded-4 shadow p-3 mb-4">
-        <h5 className="mb-3" style={{ color: "#3626b2" }}>
-          <i className="bi bi-calendar-event"></i> Chọn Slot (Buổi học):
-        </h5>
-        <div className="d-flex flex-wrap gap-2 justify-content-around">
-          {renderSlots()}
-        </div>
       </div>
 
       {/* Topic Dropdown Selector */}

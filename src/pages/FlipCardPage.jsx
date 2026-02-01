@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import $ from "jquery";
 import "../styles/flip/flip.css";
 import { Link } from "react-router-dom";
-import titleImage from "../assets/images/flip/title.png";
+import { flipImages } from "../data/flipImagesData";
 
 export default function FlipCardPage() {
   useEffect(() => {
@@ -181,21 +181,35 @@ export default function FlipCardPage() {
           cardSize = 100 / Math.sqrt(shu.length);
 
         for (var i = 0; i < shu.length; i++) {
-          var code = shu[i];
-          if (code < 10) code = "0" + code;
-          if (code == 30) code = 10;
-          if (code == 31) code = 21;
-          $(
+          var imageIndex = shu[i];
+          var imageUrl = flipImages[imageIndex] || flipImages[0];
+
+          // Tạo card element
+          var card = $(
             '<div class="game-card" style="width:' +
               cardSize +
               "%;height:" +
               cardSize +
               '%;">' +
-              '<div class="game-flipper"><div class="game-front"></div><div class="game-back" data-f="&#xf0' +
-              code +
-              ';"></div></div>' +
+              '<div class="game-flipper">' +
+              '<div class="game-front"></div>' +
+              '<div class="game-back"></div>' +
+              "</div>" +
               "</div>",
-          ).appendTo(".flip-game-container .game-area");
+          );
+
+          // Set background image cho game-back
+          card
+            .find(".game-back")
+            .css({
+              "background-image": "url(" + imageUrl + ")",
+              "background-size": "cover",
+              "background-position": "center",
+              "background-repeat": "no-repeat",
+            })
+            .attr("data-img", imageUrl);
+
+          card.appendTo(".flip-game-container .game-area");
         }
 
         // Set card actions
@@ -204,15 +218,14 @@ export default function FlipCardPage() {
             if ($(".game-area").attr("data-paused") == 1) {
               return;
             }
-            var data = $(this)
-              .addClass("active")
-              .find(".game-back")
-              .attr("data-f");
+
+            var $this = $(this).addClass("active");
+            var data = $this.find(".game-back").attr("data-img"); // Đổi từ data-f sang data-img
 
             if ($(".game-area").find(".game-card.active").length > 1) {
               setTimeout(function () {
                 var thisCard = $(
-                  ".game-area .active .game-back[data-f='" + data + "']",
+                  ".game-area .active .game-back[data-img='" + data + "']", // Đổi data-f sang data-img
                 );
 
                 if (thisCard.length > 1) {
@@ -309,8 +322,9 @@ export default function FlipCardPage() {
         <div className="game-intro-wrapper">
           <div className="common-header">
             <div className="common-logo">
-              <Link to="/">
-                <span className="arrow-icon"> Back to Home </span>
+              <Link to="/" className="back-home-btn">
+                <i className="bi bi-house-door-fill"></i>
+                <span className="back-text">Trang chủ</span>
               </Link>
             </div>
           </div>

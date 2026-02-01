@@ -6808,6 +6808,19 @@ button.swiper-button-nav.swiper-button-prev:after {
     display: none;
   }
 }
+
+@media only screen and (max-width: 400px) {
+  .ba_img {
+    display: none;
+  }
+  .ba_img2 {
+    display: none;
+  }
+  .ba_img3 {
+    display: none;
+  }
+}
+
 @media only screen and (min-width: 992px) {
   .mb2-pb-ba_inner {
     max-width: var(--mb-pb-ba_cwidth);
@@ -6826,17 +6839,13 @@ button.swiper-button-nav.swiper-button-prev:after {
   top: 0;
   right: 0;
   bottom: 0;
-  left: 0;
+  left: 20px;
 }
 .ba_img2 {
   max-width: 100%;
 }
 .imgvalignend .ba_img2 {
   align-items: end;
-}
-.ba_img3 {
-  left: auto;
-  right: var(--mb-pb-ba_imghpos);
 }
 .mb2-pb-ba.imgpos-left .ba_img3 {
   right: auto;
