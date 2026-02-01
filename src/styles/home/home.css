@@ -3721,17 +3721,6 @@ a:not([class]):focus {
 .dshb-block-content .value {
   font-size: 2.2rem;
 }
-.dshb-wbox {
-  border: solid 1px var(--mb2-pb-bordercolor);
-  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.06);
-  background-color: #fff;
-  padding: 1.8rem;
-  border-radius: var(--mb2-boxradius);
-  background-image: url(/theme/new-learning/theme/image.php/mb2nl/theme/1768588511/wave-bg-black);
-  background-repeat: no-repeat;
-  background-position: 50% 101%;
-  background-size: 120%;
-}
 .enrlpage .generalbox.info,
 .enrlpage .fixed-bar {
   display: none;
@@ -5423,11 +5412,6 @@ body:not(.css_bba4) .content-col#region-main {
   background-size: 100%;
   background-position: 50% 100%;
 }
-.tpheader_wave #page-header.nobg:before {
-  left: 0;
-  width: 100%;
-  background-image: url(/theme/new-learning/theme/image.php/mb2nl/theme/1768588511/wave-bg);
-}
 @media only screen and (max-width: 991px) {
   .tpheader_wave #page-header.nobg:before {
     background-size: 170%;
@@ -5456,9 +5440,6 @@ body:not(.css_bba4) .content-col#region-main {
   margin: 0;
   position: relative;
   display: inline-block;
-}
-.tpheader_wave.tpheader_light #page-header.nobg:before {
-  background-image: url(/theme/new-learning/theme/image.php/mb2nl/theme/1768588511/wave-bg-black);
 }
 .page-header-right {
   text-align: right;

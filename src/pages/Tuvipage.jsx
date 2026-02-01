@@ -36,15 +36,9 @@ const TuviPage = () => {
 
   const geminiServiceRef = useRef(null);
 
-  //const GEMINI_API_KEY = "AIzaSyDWZrlRMKdtz3k5x9ZpPRdKFeSu_zVpx34";
   const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
 
   useEffect(() => {
-    // Khởi tạo service
-    console.log(
-      "Creating Gemini Service with key:",
-      GEMINI_API_KEY.substring(0, 10) + "...",
-    );
     geminiServiceRef.current = createGeminiService(GEMINI_API_KEY);
 
     // Kiểm tra status
